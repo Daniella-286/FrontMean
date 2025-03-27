@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/frontend",
             "index": "src/index.html",
-            "main": "src/main.ts",   // C'est le point d'entrée pour l'application front-end
+            "main": "src/main.ts",  
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
