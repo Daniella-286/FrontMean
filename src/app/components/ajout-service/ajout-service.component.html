@@ -1,0 +1,39 @@
+
+<div class="background-overlay"></div>
+
+<div class="connexion-container">
+  <div class="connexion">
+    <div class="connexion-description">
+      <h2>Inscription</h2>
+
+      <form (ngSubmit)="registerService()" #registerServiceForm="ngForm">
+
+          <div class="contain-input">
+
+            <div class="input-group">
+              <label for="nom_service">Nom service</label>
+              <input type="text"  name="nom_service" id="nom_service" placeholder="Entrez le nom du service"  [(ngModel)]="elementForm.nom_service" required>
+            </div>
+
+        </div>
+
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="description">Déscription</label>
+            <input type="text"  name="description" id="description" placeholder="Entrez UNE description"  [(ngModel)]="elementForm.description" required>
+          </div>
+        </div>
+
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="imageUrl">Image</label>
+            <input type="file" name="image" id="image" (change)="onFileSelected($event)" required>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn"
+        [disabled]="registerServiceForm.invalid">Ajouter</button>
+
+      </form>
+    </div>
+</div>

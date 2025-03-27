@@ -1,0 +1,68 @@
+.chart-section {
+  margin-bottom: 30px;
+}
+
+.chart-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 60px;
+}
+
+.y-axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 200px;
+  margin-right: 10px;
+}
+
+.y-tick {
+  height: 50px;
+  line-height: 50px;
+  text-align: right;
+  padding-right: 5px;
+  font-size: 12px;
+  color: #333;
+}
+
+.chart-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 200px;
+  border-left: 2px solid #333;
+  border-bottom: 2px solid #333;
+  padding: 10px;
+}
+
+.bar {
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.value {
+  position: absolute;
+  top: -20px;
+  font-size: 12px;
+  color: black;
+}
+
+.x-axis {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  MARGIN-LEFT: 63px;
+}
+
+.x-label {
+  width: 50px;
+  text-align: center;
+  font-size: 14px;
+}

@@ -1,0 +1,151 @@
+/* Reset des marges et paddings */
+body {
+  background-image: url('fonds.webp');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+}
+
+/* Superposition floutée pour l'effet */
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* Teinte légèrement plus foncée */
+  backdrop-filter: blur(8px) contrast(1.2); /* Flou + contraste ajusté */
+  z-index: -1; /* Place l'effet derrière le contenu */
+}
+
+/* Reset des éléments de base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Conteneur des connexions */
+.connexion-container {
+  display: flex;
+  flex-direction: column; /* Affichage en colonne */
+  align-items: center; /* Centrer le formulaire */
+  justify-content: center; /* Centrer le formulaire verticalement */
+  height: 100vh; /* Hauteur de la page entière */
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Style du formulaire de connexion */
+.connexion {
+  background-color: rgba(255, 255, 255, 0.9); /* Fond semi-transparent pour mieux contraster */
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 700px; /* Largeur maximale du formulaire */
+}
+
+/* Style des titres */
+.connexion-description h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+/* Groupe des champs de saisie */
+.input-group {
+  width: 100%;
+  margin-bottom: 20px; /* Espacement entre les champs */
+}
+
+.input-group label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: #008f8c;
+  background-color: #fff;
+  outline: none;
+}
+
+.input-group select {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.input-group select:focus {
+  border-color: #008f8c;
+  background-color: #fff;
+  outline: none;
+}
+
+
+/* Style du bouton de soumission */
+.submit-btn {
+  width:  40%;
+  padding: 15px;
+  background-color: #008f8c;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #00776b;
+}
+
+.contain-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.contain-input {
+  flex: 1;
+}
+
+.server-message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8d7da; /* Couleur de fond pour les erreurs */
+  color: #721c24; /* Couleur de texte pour les erreurs */
+  border: 1px solid #f5c6cb; /* Bordure rouge pour les erreurs */
+  border-radius: 5px;
+}
+
+.server-message.success {
+  background-color: #d4edda; /* Couleur de fond pour les succès */
+  color: #155724; /* Couleur de texte pour le succès */
+  border: 1px solid #c3e6cb; /* Bordure verte pour le succès */
+}

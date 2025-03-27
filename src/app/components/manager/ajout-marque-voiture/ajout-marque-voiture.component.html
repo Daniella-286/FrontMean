@@ -1,0 +1,24 @@
+
+<div class="background-overlay"></div>
+<div class="connexion-container">
+  <div class="connexion">
+    <div class="connexion-description">
+      <h2>Sous service</h2>
+
+      <form (ngSubmit)="AddMarques()" #addMarqueForm="ngForm">
+
+          <div class="contain-input">
+            <div class="input-group">
+              <label for="nom_marque">Nom sous service</label>
+              <input type="text"  name="nom_marque" id="nom_marque"
+              placeholder="Entrez le nom du sous-service"
+              [(ngModel)]="elementForm.nom_marque" required>
+            </div>
+          </div>
+
+        <button type="submit" class="submit-btn"
+        [disabled]="addMarqueForm.invalid">Ajouter</button>
+
+      </form>
+    </div>
+</div>

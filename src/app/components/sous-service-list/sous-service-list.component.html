@@ -1,0 +1,16 @@
+
+  <div class="background-overlay"></div>
+
+  <div class="titre">
+    <h1>Liste des sous-services</h1>
+  </div>
+
+  <div class="sous-services-container">
+    @for (sous_service of sous_services; track sous_service._id) {
+    <div class="sous-services">
+      <div class="sous-services-description">
+        <h2>{{ sous_service.nom_sous_service }}</h2>
+
+      </div>
+    </div>}
+  </div>

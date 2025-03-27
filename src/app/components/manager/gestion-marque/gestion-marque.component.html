@@ -1,0 +1,56 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="piece-container">
+  <div class="piece">
+    <div class="piece">
+      <h2>Marques</h2>
+      <button type="button" class="submit-btn" (click)="openAddPopup()">Ajouter</button>
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Ajouter un marques</h2>
+      <form (ngSubmit)="AddMarque()" #addMarqueForm="ngForm">
+        <div class="contain-input">
+
+          <div class="input-group">
+            <label for="nom_marque">Marques</label>
+            <input type="text" name="nom_marque" id="nom_marque" placeholder="Entrez le marque " [(ngModel)]="elementForm.nom_marque" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="addMarqueForm.invalid">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Popup pour la mise à jour -->
+  <div class="popup" *ngIf="showUpdatePopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Modifier un Parking</h2>
+      <form (ngSubmit)="updateMarque()" #updatePieceForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="nom_marque">nom marque</label>
+            <input type="text" name="nom_marque" id="nom_marque" placeholder="Entrez le nom de la marque" [(ngModel)]="updateForm.nom_marque" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="updatePieceForm.invalid">Modifier</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des Piece -->
+  <div class="marque-list">
+    <div class="service" *ngFor="let marque of marques;">
+      <div class="service-description">
+        <h2>{{ marque.nom_marque }}</h2>
+      </div>
+      <button  class="submit-btn-delete" (click)="deleteMarque(marque._id)">Supprimer</button>
+      <button type="button" class="submit-btn-update" (click)="openUpdatePopup(marque)">Update Marques</button>
+    </div>
+
+  </div>
+</div>

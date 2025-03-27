@@ -1,0 +1,31 @@
+<div *ngFor="let stat of statistiques" class="chart-section">
+  <h3>{{ stat.title }}</h3>
+
+  <div class="chart-wrapper">
+    <!-- Axe Y (valeurs) -->
+    <div class="y-axis">
+      <div *ngFor="let tick of yTicks" class="y-tick">
+        {{ tick }}
+      </div>
+    </div>
+
+    <!-- Conteneur du diagramme -->
+    <div class="chart-container">
+      <div
+        class="bar"
+        *ngFor="let data of stat.chartData"
+        [style.height]="data.value + 'px'"
+        [style.backgroundColor]="data.color"
+      >
+        <span class="value">{{ data.value }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Axe X (mois) -->
+  <div class="x-axis">
+    <div *ngFor="let data of stat.chartData" class="x-label">
+      {{ data.label }}
+    </div>
+  </div>
+</div>

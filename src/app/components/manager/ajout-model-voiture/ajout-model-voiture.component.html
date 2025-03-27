@@ -1,0 +1,34 @@
+
+<div class="background-overlay"></div>
+<div class="connexion-container">
+  <div class="connexion">
+    <div class="connexion-description">
+      <h2>Sous service</h2>
+
+      <form (ngSubmit)="AddModel()" #addModelForm="ngForm">
+
+          <div class="contain-input">
+            <div class="input-group">
+              <label for="nom_modele">Nom modèle</label>
+              <input type="text"  name="nom_modele" id="nom_modele"
+              placeholder="Entrez le nom de la nom_modele"
+              [(ngModel)]="elementForm.nom_modele" required>
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="marque">Marques :</label>
+            <select name="marque" [(ngModel)]="elementForm.marque" required >
+              <option value="default" selected>-- Sélectionnez une option --</option>
+              @for (marque of marques; track $index) {
+                <option value="{{marque._id}}" >{{marque.nom_marque}}</option>
+              }
+            </select>
+          </div>
+
+        <button type="submit" class="submit-btn"
+        [disabled]="addModelForm.invalid">Ajouter</button>
+
+      </form>
+    </div>
+</div>

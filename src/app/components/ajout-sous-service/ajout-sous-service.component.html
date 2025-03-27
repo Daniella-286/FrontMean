@@ -1,0 +1,42 @@
+
+<div class="background-overlay"></div>
+
+<div class="connexion-container">
+  <div class="connexion">
+    <div class="connexion-description">
+      <h2>Sous service</h2>
+
+      <form (ngSubmit)="AddSousService()" #registerSousServiceForm="ngForm">
+
+          <div class="contain-input">
+            <div class="input-group">
+              <label for="nom_sous_service">Nom sous service</label>
+              <input type="text"  name="nom_sous_service" id="nom_sous_service" placeholder="Entrez le nom du sous-service"  [(ngModel)]="elementForm.nom_sous_service" required>
+            </div>
+          </div>
+
+          <div class="contain-input">
+            <div class="input-group">
+              <label for="service">Service :</label>
+              <select name="service" [(ngModel)]="elementForm.id_service" required >
+                <option value="default" selected>-- Sélectionnez une option --</option>
+                @for (service of services; track $index) {
+                  <option value="{{service._id}}" >{{service.nom_service}}</option>
+                }
+              </select>
+            </div>
+          </div>
+
+            <div class="contain-input">
+              <div class="input-group">
+                <label for="tarig">Tarif</label>
+                <input type="number"  name="tarif" id="tarif" placeholder="Entrez un tarif"  [(ngModel)]="elementForm.tarif" required>
+              </div>
+            </div>
+
+        <button type="submit" class="submit-btn"
+        [disabled]="registerSousServiceForm.invalid">Ajouter</button>
+
+      </form>
+    </div>
+</div>

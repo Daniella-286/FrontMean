@@ -1,0 +1,77 @@
+<div class="titre">
+  <h1>Planning d'intervention  </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    <button type="button" class="submit-btn" (click)="getListdemandeClientToManagerSearch()">Search</button>
+  </div>
+</div>
+
+<!-- <div>
+  <table>
+    <thead>
+      <tr>
+        <th>Heure </th>
+        <th>Date</th>
+        <th>Vehicule</th>
+        <th>Durée d'intervention</th>
+        <th>Fin d'intervention</th>
+        <th>Sous service</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let demande of (demandeClientSearch.length > 0 ? demandeClientSearch : demandes)">
+        <td>{{ demande.id_demande }}</td>
+        <td>{{ demande.date_demande }}</td>
+        <td>{{ demande.probleme }}</td>
+        <td>{{ demande.vehicule.immatriculation }}</td>
+        <td>{{ demande.service_principal.nom }}</td>
+        <td>{{ demande.service_principal.nom }}</td>
+        <td>
+          <button type="button" class="submit-btn">envoyer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Heure</th>
+        <th>Date</th>
+        <th>Véhicule</th>
+        <th>Durée d'intervention</th>
+        <th>Fin d'intervention</th>
+        <th>Sous service</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of tasksData | keyvalue">
+        <td>08:30</td>
+        <td>2025-03-25</td>
+        <td>{{ entry.key }}</td>
+        <td>1h 30min</td>
+        <td>10:00</td>
+        <td>Maintenance moteur</td>
+        <td>
+          <button type="button" class="submit-btn" (click)="openPopup(entry.key)">Voir Tâche</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Popup -->
+<div *ngIf="showPopup" class="popup-overlay">
+  <div class="popup">
+    <h2>Liste des tâches</h2>
+    <ul>
+      <li *ngFor="let task of selectedTasks">{{ task }}</li>
+    </ul>
+    <button (click)="closePopup()">Fermer</button>
+  </div>
+</div>

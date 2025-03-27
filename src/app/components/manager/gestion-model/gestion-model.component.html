@@ -1,0 +1,107 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="piece-container">
+  <div class="piece">
+    <div class="piece">
+      <h2>Piece</h2>
+      <button type="button" class="submit-btn" (click)="openAddPopup()">Ajouter</button>
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Ajout  Modele</h2>
+      <form (ngSubmit)="AddModel()" #addMarqueForm="ngForm">
+        <div class="contain-input">
+
+          <div class="input-group">
+            <label for="nom_model">Modele</label>
+            <input type="text" name="nom_modele"
+            id="nom_modele" placeholder="Entrez le marque "
+            [(ngModel)]="elementForm.nom_modele" required>
+          </div>
+
+          <div class="input-group">
+            <label for="marque">Marques :</label>
+            <select name="marque" [(ngModel)]="elementForm.marque" required >
+              <option value="default" selected>-- Sélectionnez une option --</option>
+              @for (marque of marques; track $index) {
+                <option value="{{marque._id}}" >{{marque.nom_marque}}</option>
+              }
+            </select>
+          </div>
+
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="addMarqueForm.invalid">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Popup pour la mise à jour -->
+  <div class="popup" *ngIf="showUpdatePopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Modifier modele</h2>
+      <form (ngSubmit)="updatemodel()" #updateModelForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="nom_modele">nom modele</label>
+            <input type="text" name="nom_modele" id="nom_modele" placeholder="Entrez le nom de la model" [(ngModel)]="updateForm.nom_modele" required>
+          </div>
+          <div class="input-group">
+            <label for="marque">Marques :</label>
+            <select name="marque" [(ngModel)]="updateForm.id_marque" required>
+              <option value="" disabled>-- Sélectionnez une option --</option>
+              <option *ngFor="let marque of marques" [value]="marque._id">
+                {{ marque.nom_marque }}
+              </option>
+            </select>
+          </div>
+
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="updateModelForm.invalid">Modifier</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des Modele -->
+  <div class="model-list">
+    <div class="service" *ngFor="let model of models;">
+      <div class="service-description">
+        <h2>{{ model.nom_modele }}</h2>
+        <p>{{ model.marque.nom_marque }}</p>
+      </div>
+      <button class="submit-btn-delete" (click)="deletemodel(model._id)">Supprimer</button>
+      <button type="button" class="submit-btn-update" (click)="openUpdatePopup(model)">Update</button>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>model</h2>
+        <p>10000</p>
+      </div>
+      <button class="submit-btn-delete">Supprimer</button>
+      <button type="button" class="submit-btn-update" >Update</button>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>model</h2>
+        <p>10000</p>
+      </div>
+      <button class="submit-btn-delete">Supprimer</button>
+      <button type="button" class="submit-btn-update" >Update</button>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>model</h2>
+        <p>10000</p>
+      </div>
+      <button class="submit-btn-delete">Supprimer</button>
+      <button type="button" class="submit-btn-update" >Update</button>
+    </div>
+
+  </div>
+</div>

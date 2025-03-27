@@ -1,0 +1,66 @@
+
+
+  <!-- <div class="background-overlay"></div>
+
+  <div class="titre">
+    <h1>Liste des services</h1>
+  </div>
+
+  <div class="services-container">
+    <a *ngFor="let service of services; trackBy: trackByService"
+       [routerLink]="['/sous-services', service._id]"
+       style="text-decoration: none; color: inherit;">
+      <div class="service">
+        <div class="service-image">
+          <img [src]="service.imageUrl" alt="Image du service" />
+        </div>
+        <div class="service-description">
+          <h2>{{ service.nom_service }}</h2>
+          <p>{{ service.description }}</p>
+        </div>
+      </div>
+    </a>
+
+
+  </div> -->
+
+
+
+
+
+<!-- moal essaei -->
+
+
+ <div class="services-container">
+  <div *ngFor="let service of services; trackBy: trackByService" class="service">
+    <div class="service-image">
+      <img [src]="service.imageUrl" alt="Image du service" />
+    </div>
+    <div class="service-description">
+      <h2>{{ service.nom_service }}</h2>
+      <p>{{ service.description }}</p>
+    </div>
+
+    <button (click)="openModal(service._id)">Voir les sous-services</button>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isModalOpen">
+  <div class="modal">
+    <h2>Sous-services</h2>
+    <button class="close-btn" (click)="closeModal()">X</button>
+
+    <div *ngIf="sous_services.length > 0; else noSousService">
+      <ul>
+        <li *ngFor="let sous_service of sous_services">
+          {{ sous_service.nom_sous_service }} - {{ sous_service.tarif }} €
+        </li>
+      </ul>
+    </div>
+
+    <ng-template #noSousService>
+      <p>Aucun sous-service disponible.</p>
+    </ng-template>
+  </div>
+</div>
+

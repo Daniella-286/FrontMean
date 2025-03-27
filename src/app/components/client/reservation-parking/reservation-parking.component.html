@@ -1,0 +1,80 @@
+<div class="background-overlay"  *ngIf="showPopup" (click)="closePopup()"></div>
+
+<div class="parking-container">
+  <div class="parking">
+    <div class="parking-description">
+      <h1>Reservation parking </h1>
+      <div class="input-group">
+        Veuillez ajouter une date pour voir la disponibilité de nos parking
+      </div>
+      <div class="input-group">
+        <label for="parking">Recherche</label>
+
+        <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+        - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+        <button type="button" class="submit-btn" (click)="getParkingDisponible()">Rechercher</button>
+      </div>
+
+      <div *ngIf="parkingsDisponibles.length > 0">
+        <div class="parking-list">
+          <div class="service" *ngFor="let parking of parkingsDisponibles">
+            <div class="service-description">
+              <h2>{{ parking.numero }}</h2>
+              <p>{{ parking.tarif }} AR</p>
+            </div>
+            <button type="button" class="submit-btn" (click)="openAddResaParkingPopup(parking._id)">Resérver</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <div *ngIf="message" class="alert">
+        {{ message }}
+      </div>
+      <h2>Ajouter un Parking</h2>
+      <form (ngSubmit)="addReservationParking()" #addResaParking="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="service">Vehicule :</label>
+            <select name="id_vehicule" [(ngModel)]="elementForm.id_vehicule" required>
+              <option value="default" selected>-- Sélectionnez une option --</option>
+              <option *ngFor="let vehicule of vehicules" [value]="vehicule._id">
+                {{ vehicule.immatriculation }}
+              </option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="date">Date</label>
+            <input type="datetime-local" name="date_debut" id="date_debut" placeholder="Entrez le date_debut" [(ngModel)]="elementForm.date_debut" required> -
+            <input type="datetime-local" name="date_fin" id="date_fin" placeholder="Entrez le date_fin" [(ngModel)]="elementForm.date_fin" required>
+          </div>
+        </div>
+
+        <!-- Champ caché pour id_parking -->
+        <!-- <input type="text" name="id_parking" [(ngModel)]="elementForm.id_parking" required> -->
+
+        <button type="submit" class="submit-btn" [disabled]="addResaParking.invalid">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+  <!-- Liste des parkings -->
+  <!-- <div class="parking-list">
+    <div class="service" *ngFor="let parking of parkings;">
+      <div class="service-description">
+        <h2>{{ parking.numero }}</h2>
+        <p>{{ parking.tarif }}</p>
+      </div>
+      <button type="button" class="submit-btn" (click)="openAddResaParkingPopup()">Resérver</button>
+    </div>
+  </div>
+</div> -->
+
