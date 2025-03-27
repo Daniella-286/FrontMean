@@ -1,0 +1,44 @@
+.emploi-du-temps {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  margin-top: 95px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #31c5b5;
+  color: white;
+}
+
+.jour {
+  background-color: #ecf0f1;
+  font-weight: bold;
+}
+
+.cell {
+  height: 50px;
+  min-width: 120px;
+}
+
+.cell:not(:empty) {
+  background-color: #49c545d1;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}

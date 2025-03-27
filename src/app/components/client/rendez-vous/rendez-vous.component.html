@@ -1,0 +1,55 @@
+
+
+<div class="background-overlay"  *ngIf="showPopup" (click)="closePopup()"></div>
+
+<div class="titre">
+  <h1>Liste des devis</h1>
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Sous-service</th>
+        <th>Date demande</th>
+        <th>status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Lavage</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button type="button" class="submit-btn" (click)="openRendezVousPopup()">Rendez-vous</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <span class="close-btn" (click)="closePopup()">&times;</span>
+    <h2>Ajouter un Parking</h2>
+    <form  #addRendezVous="ngForm"> <!-- (ngSubmit)="addRendezVous()" -->
+      <div class="contain-input">
+        <div class="input-group">
+          <label for="id_demande">Parking</label>
+          <input type="text" name="id_demande" id="id_demande" required>
+        </div>
+        <div class="input-group">
+          <label for="date_rdv">Tarif</label>
+          <input type="date" name="date_rdv" id="date_rdv"  required>
+        </div>
+        <div class="input-group">
+          <label for="client">id_client</label>
+          <input type="datetime" name="date_debut" id="date_debut" placeholder="Entrez le date_debut"  required>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn" [disabled]="addRendezVous.invalid">Ajouter</button>
+    </form>
+  </div>
+</div>
+

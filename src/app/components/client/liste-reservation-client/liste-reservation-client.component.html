@@ -1,0 +1,35 @@
+<div class="titre">
+  <h1>Liste des réservations  en attente </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getReservationSearch()">Search</button>
+  </div>
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Parking</th>
+        <th>Véhicules</th>
+        <th>Date debut</th>
+        <th>Date fin</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Itérer sur les réservations -->
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ reservation.id_parking.numero}}</td>  <!-- Afficher le parking -->
+        <td>{{ reservation.id_vehicule.immatriculation }}</td>  <!-- Afficher le véhicule -->
+        <td>{{ reservation.date_debut | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ reservation.date_fin | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ reservation.statut }}</td>
+        <button type="button" class="submit-btn" (click)="confirmReservation(reservation._id)">Confirmer</button>
+        
+        <button type="button" class="submit-btn" (click)="cancelReservation(reservation._id)">Annuler</button>
+      </tr>
+    </tbody>
+  </table>
+</div>

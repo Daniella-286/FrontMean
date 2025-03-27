@@ -1,0 +1,43 @@
+<div class="titre">
+  <h1>Liste des demande devis en attente </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getListdemandeAttenteSearch()">Search</button>
+  </div>
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date de demande</th>
+        <th>Problème</th>
+        <th>Immatriculation</th>
+        <th>Service</th>
+        <th>Sous service</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Itérer sur les réservations -->
+      <tr *ngFor="let demande of (demandeAttenteSearch.length > 0 ? demandeAttenteSearch : demandes)">
+
+        <td>{{ demande.date_demande | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ demande.probleme }}</td>
+        <td>{{ demande.vehicule.immatriculation }}</td>
+        <td>{{ demande.service_principal.nom }}</td>
+        <td>
+          <ul ngSkipHydration>
+            <li *ngFor="let sous_service of (demande.sous_services || [])">
+              {{ sous_service.nom }}
+            </li>
+            <li *ngIf="!demande.sous_services || demande.sous_services.length === 0">
+              Aucun sous-service disponible.
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+

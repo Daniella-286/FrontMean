@@ -1,0 +1,14 @@
+
+<!-- <nav>
+  <a href="/services" routerLinkActive="active">Articles</a> |
+  <a href="/header-admin" routerLinkActive="active">Catégories</a>
+</nav> -->
+  <!-- <p *ngIf="true">Current Route: {{ currentRoute() }}</p> -->
+  <app-header *ngIf="!hideHeaderFooter()"></app-header>
+
+  <router-outlet></router-outlet>
+
+  <app-footer *ngIf="!hideHeaderFooter()"></app-footer>
+
+
+

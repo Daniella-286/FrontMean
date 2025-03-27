@@ -1,0 +1,132 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="parking-container">
+  <div class="parking">
+    <div class="parking-description">
+      <h2>Parkings</h2>
+      <button type="button" class="submit-btn" (click)="openAddPopup()">Ajouter parking</button>
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Ajouter un Parking</h2>
+      <form (ngSubmit)="AddParking()" #addParkingForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="numero">Numéro</label>
+            <input type="text" name="numero" id="numero" placeholder="Entrez le numéro du parking" [(ngModel)]="elementForm.numero" required>
+          </div>
+          <div class="input-group">
+            <label for="tarif">Tarif</label>
+            <input type="number" name="tarif" id="tarif" placeholder="Entrez le tarif" [(ngModel)]="elementForm.tarif" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="addParkingForm.invalid">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Popup pour la mise à jour -->
+  <div class="popup" *ngIf="showUpdatePopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Modifier un Parking</h2>
+      <form (ngSubmit)="updateParking()" #updateParkingForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="numeroUpdate">Numéro</label>
+            <input type="text" name="numeroUpdate" id="numeroUpdate" placeholder="Entrez le numéro du parking" [(ngModel)]="updateForm.numero" required>
+          </div>
+          <div class="input-group">
+            <label for="tarifUpdate">Tarif</label>
+            <input type="number" name="tarifUpdate" id="tarifUpdate" placeholder="Entrez le tarif" [(ngModel)]="updateForm.tarif" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="updateParkingForm.invalid">Modifier</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des parkings -->
+  <div class="parking-list">
+    <div class="service" *ngFor="let parking of parkings;">
+      <div class="service-description">
+        <h2>{{ parking.numero }}</h2>
+        <p>{{ parking.tarif }}</p>
+      </div>
+      <button class="submit-btn-delete" (click)="deleteParking(parking._id)">Supprimer</button>
+      <button type="button" class="submit-btn-update" (click)="openUpdatePopup(parking)">Update parking</button>
+    </div>
+  </div>
+
+  <div class="parking-list">
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+    <div class="service">
+      <div class="service-description">
+        <h2>Parking 1</h2>
+        <p>100000</p>
+      </div>
+      <button class="submit-btn-delete">Delete</button>
+      <button  class="submit-btn-update"  >Update</button>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,139 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="piece-container">
+  <div class="piece">
+    <div class="piece">
+      <h2>Gestion véhicules</h2>
+    </div>
+  </div>
+
+
+  <!-- Popup pour la mise à jour -->
+  <div class="popup" *ngIf="showUpdatePopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Modifier vehiculee</h2>
+      <form (ngSubmit)="updateVehicule()" #updatevehiculeForm="ngForm">
+        <div class="contain-input">
+
+          <!-- Sélection de la Marque -->
+          <div class="input-group">
+            <label for="id_marque">Marques :</label>
+            <select name="id_marque" [(ngModel)]="updateForm.id_marque" (change)="loadModel()" required>
+              <option value="" disabled selected>-- Sélectionnez une marque --</option>
+              <option *ngFor="let marque of marques" [value]="marque._id">{{ marque.nom_marque }}</option>
+            </select>
+          </div>
+
+          <!-- Affichage des modèles sous forme de radio buttons -->
+          <div class="input-group" *ngIf="modeles.length > 0">
+            <label for="id_modele">Modèles :</label>
+            <div *ngFor="let modele of modeles">
+              <label>
+                <input type="radio" name="id_modele" [(ngModel)]="updateForm.id_modele" [value]="modele._id" required />
+                {{ modele.nom_modele }}
+              </label>
+            </div>
+          </div>
+
+          <!-- Immatriculation -->
+          <div class="input-group">
+            <label for="immatriculation">Immatriculation</label>
+            <input type="text" name="immatriculation" [(ngModel)]="updateForm.immatriculation" id="immatriculation" placeholder="Entrez votre immatriculation" required>
+          </div>
+
+          <!-- Année -->
+          <div class="input-group">
+            <label for="annee">Année</label>
+            <input type="text" id="annee" name="annee" [(ngModel)]="updateForm.annee" placeholder="Entrez votre année" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="couleur">couleur</label>
+          <input type="text" id="couleur" name="couleur" [(ngModel)]="updateForm.couleur" placeholder="Entrez votre année" required>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="updatevehiculeForm.invalid">Modifier</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des vehiculee -->
+  <div class="vehicule-list">
+    <div class="service" *ngFor="let vehicule of vehicules;">
+      <div class="service-description">
+        <h2>{{ vehicule.nom_vehiculee }}</h2>
+        <p>{{ vehicule.marque.nom_marque }}</p>
+      </div>
+      <button class="submit-btn-delete" (click)="deleteVehicule(vehicule._id)">Supprimer</button>
+      <button type="button" class="submit-btn-update" (click)="openUpdatePopup(vehicule)">Update</button>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>Immatriculation</h2>
+        <p>Annee</p>
+        <p>Couleur</p>
+      </div>
+      <div class="btn-delete-update">
+        <button class="submit-btn-delete">Supprimer</button>
+        <button type="button" class="submit-btn-update" >Update</button>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>Immatriculation</h2>
+        <p>Annee</p>
+        <p>Couleur</p>
+      </div>
+      <div class="btn-delete-update">
+        <button class="submit-btn-delete">Supprimer</button>
+        <button type="button" class="submit-btn-update" >Update</button>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>Immatriculation</h2>
+        <p>Annee</p>
+        <p>Couleur</p>
+      </div>
+      <div class="btn-delete-update">
+        <button class="submit-btn-delete">Supprimer</button>
+        <button type="button" class="submit-btn-update" >Update</button>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>Immatriculation</h2>
+        <p>Annee</p>
+        <p>Couleur</p>
+      </div>
+      <div class="btn-delete-update">
+        <button class="submit-btn-delete">Supprimer</button>
+        <button type="button" class="submit-btn-update" >Update</button>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>Immatriculation</h2>
+        <p>Annee</p>
+        <p>Couleur</p>
+      </div>
+      <div class="btn-delete-update">
+        <button class="submit-btn-delete">Supprimer</button>
+        <button type="button" class="submit-btn-update" >Update</button>
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </div>
+</div>

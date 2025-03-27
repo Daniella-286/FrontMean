@@ -1,0 +1,235 @@
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+
+/* === FORMULAIRE POPUP === */
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 420px;
+  max-width: 90%;
+}
+
+h2 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* === CHAMPS DE SAISIE === */
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.input-group input[type="text"],
+.input-group input[type="file"],
+.input-group input[type="number"],
+.input-group select{
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border 0.3s ease-in-out;
+}
+
+
+
+.input-group input[type="text"]:focus,
+.input-group input[type="file"]:focus ,
+.input-group input[type="number"]:focus ,
+.input-group select:focus {
+  border-color: #28a745;
+  outline: none;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.3);
+}
+
+/* === STYLE POUR LE CHAMP IMAGE === */
+.input-group input[type="file"] {
+  padding: 8px;
+  cursor: pointer;
+  border: 1px dashed #ccc;
+  background: #f8f8f8;
+}
+
+.input-group input[type="file"]::-webkit-file-upload-button {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.input-group input[type="file"]::-webkit-file-upload-button:hover {
+  background: #218838;
+}
+
+/* === BOUTON DE VALIDATION === */
+.submit-btn {
+  width: 100%;
+  background: #47a75d;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+.submit-btn-delete {
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-top: 10px;
+  background-color: #c90f0fd9;
+}
+.submit-btn-update {
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  margin-top: 10px;
+  background-color: #0d9d2cd6;
+}
+
+.submit-btn:hover {
+  background: #2f793f;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.submit-btn {
+  background: #47a75d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 60px;
+  width: 150px;
+  height: 45px;
+  border-radius: 15px;
+}
+
+.model-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 40px;
+}
+
+.btn-delete-update {
+  margin-top: 30px;
+  margin-left: 40px;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.submit-btn-delete:hover {
+  background-color: #a00d0d;
+}
+
+.submit-btn-update:hover {
+  background-color: #087d23;
+}
+
+
+.popup {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.popup.ng-animating {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.vehicule-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Centre les véhicules */
+  margin-top: 100px;
+}
+
+.service {
+  width: 300px; /* Taille fixe des cartes */
+  height: 160px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+.service-description {
+  flex: 1;
+}
+
+.btn-delete-update {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.submit-btn-delete,
+.submit-btn-update {
+  width: 100px;
+}
+

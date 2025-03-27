@@ -1,0 +1,91 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="piece-container">
+  <div class="piece">
+    <div class="piece">
+      <h2>Piece</h2>
+      <button type="button" class="submit-btn" (click)="openAddPopup()">Ajouter pièce</button>
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Ajouter un Parking</h2>
+      <form (ngSubmit)="AddPiece()" #addPieceForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="nom_piece">Nom pièce</label>
+            <input type="text" name="nom_piece" id="nom_piece" placeholder="Entrez le nom du pièce" [(ngModel)]="elementForm.nom_piece" required>
+          </div>
+          <div class="input-group">
+            <label for="prix_unitaire">Prix unitaire </label>
+            <input type="number" name="prix_unitaire" id="prix_unitaire" placeholder="Entrez le prix " [(ngModel)]="elementForm.prix_unitaire" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="addPieceForm.invalid">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Popup pour la mise à jour -->
+  <div class="popup" *ngIf="showUpdatePopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Modifier un Parking</h2>
+      <form (ngSubmit)="updatePiece()" #updatePieceForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="nom_piece">nom pièce</label>
+            <input type="text" name="nom_piece" id="nom_piece" placeholder="Entrez le nom du piece" [(ngModel)]="updateForm.nom_piece" required>
+          </div>
+          <div class="input-group">
+            <label for="prix_unitaire">prix unitaire</label>
+            <input type="number" name="prix_unitaire" id="prix_unitaire" placeholder="Entrez le prix unitaire" [(ngModel)]="updateForm.prix_unitaire" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="updatePieceForm.invalid">Modifier</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Liste des Piece -->
+  <div class="piece-list">
+    <div class="service" *ngFor="let piece of pieces;">
+      <div class="service-description">
+        <h2>{{ piece.nom_piece }}</h2>
+        <p>{{ piece.prix_unitaire }}</p>
+      </div>
+      <button class="submit-btn-delete" (click)="deletePiece(piece._id)">Supprimer</button>
+      <button type="button"  class="submit-btn-update"  (click)="openUpdatePopup(piece)">Update Pièce</button>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>piece </h2>
+        <p>1000</p>
+      </div>
+      <button class="submit-btn-delete" >Delete</button>
+      <button type="button"  class="submit-btn-update" >Update</button>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>piece </h2>
+        <p>1000</p>
+      </div>
+      <button class="submit-btn-delete" >Delete</button>
+      <button type="button"  class="submit-btn-update" >Update</button>
+    </div>
+
+    <div class="service">
+      <div class="service-description">
+        <h2>piece </h2>
+        <p>1000</p>
+      </div>
+      <button class="submit-btn-delete" >Delete</button>
+      <button type="button"  class="submit-btn-update" >Update</button>
+    </div>
+
+  </div>
+</div>

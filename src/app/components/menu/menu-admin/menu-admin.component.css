@@ -1,0 +1,93 @@
+/* Style du menu Admin */
+.menu-admin {
+  background-color: #006b68; /* Couleur sombre pour un contraste fort */
+  color: white;
+  padding: 20px 0;
+  text-align: left;
+  font-size: 18px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px; /* Largeur fixe du menu */
+  z-index: 1000;
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2); /* Ombre sur le côté droit */
+}
+
+/* Liste du menu Admin */
+.menu-admin ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: medium;
+}
+
+/* Liens du menu Admin */
+.menu-admin ul li {
+  display: block;
+  margin: 10px 0;
+}
+
+.menu-admin ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: normal;
+  padding: 10px 15px;
+  transition: 0.3s;
+  border-radius: 5px;
+  display: block;
+}
+
+/* Effet au survol */
+.menu-admin ul li a:hover {
+  color: #333;
+  background-color: #f0f0f0; /* Fond clair au survol */
+  transform: scale(1.05); /* Effet de mise en avant */
+}
+
+/* Effet pour écran mobile */
+@media (max-width: 768px) {
+  .menu-admin {
+    width: 200px; /* Réduit la largeur du menu sur mobile */
+  }
+}
+
+/* Style du sous-menu */
+.menu-admin ul .submenu {
+  display: none; /* Caché par défaut */
+  list-style: none;
+  padding-left: 15px;
+}
+
+.menu-admin ul .has-submenu:hover .submenu {
+  display: block; /* Affiche le sous-menu au survol */
+}
+
+.menu-admin ul .submenu li {
+  margin: 5px 0;
+}
+
+.menu-admin ul .submenu a {
+  font-size: 16px;
+  padding: 8px 20px;
+  background-color: #008080; /* Légère variante pour distinguer */
+  border-radius: 3px;
+}
+
+.menu-admin ul .submenu a:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Ajouter une flèche à côté du texte */
+.has-submenu > a::after {
+  content: " ▼"; /* Flèche vers le bas */
+  font-size: 14px;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotation de la flèche quand on survole */
+.has-submenu:hover > a::after {
+  transform: rotate(180deg); /* Flèche vers le haut */
+}

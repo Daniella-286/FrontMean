@@ -1,0 +1,86 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="parking-container">
+  <div class="parking">
+    <div class="parking-description">
+      <h2>Service</h2>
+      <button type="button" class="submit-btn" (click)="openAddPopup()">Ajouter </button>
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Ajouter un Parking</h2>
+      <form (ngSubmit)="AddService()" #addServiceForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="nom_service">Nom service</label>
+            <input type="text"  name="nom_service" id="nom_service" placeholder="Entrez le nom du service"  [(ngModel)]="elementForm.nom_service" required>
+          </div>
+          <div class="input-group">
+            <label for="description">Déscription</label>
+            <input type="text"  name="description" id="description" placeholder="Entrez UNE description"  [(ngModel)]="elementForm.description" required>
+          </div>
+          <div class="input-group">
+            <label for="imageUrl">Image</label>
+            <input type="file" name="image" id="image" (change)="onFileSelected($event)" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="addServiceForm.invalid">Ajouter</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Popup pour la mise à jour -->
+  <div class="popup" *ngIf="showUpdatePopup">
+    <div class="popup-content">
+      <span class="close-btn" (click)="closePopup()">&times;</span>
+      <h2>Modifier un Parking</h2>
+      <form (ngSubmit)="updateService()" #updateParkingForm="ngForm">
+        <div class="contain-input">
+          <div class="input-group">
+            <label for="nom_service">Nom service</label>
+            <input type="text" name="nom_service" id="nom_service" placeholder="Entrez le Nom service du parking" [(ngModel)]="updateForm.nom_service" required>
+          </div>
+          <div class="input-group">
+            <label for="description">Déscription</label>
+            <input type="text" name="description" id="description" placeholder="Entrez le tarif" [(ngModel)]="updateForm.description" required>
+          </div>
+
+          <div class="input-group">
+            <label for="image">Image</label>
+            <input type="file" name="image" id="image" placeholder="Entrez le tarif" [(ngModel)]="updateForm.image" (change)="onFileSelected($event)" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" [disabled]="updateParkingForm.invalid">Modifier</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="services-container">
+    @for (service of services; track service._id) {
+      <div class="service">
+        <div class="service-image">
+          <img [src]="service.imageUrl" alt="Image du service" />
+        </div>
+        <div class="service-description">
+            <h2>{{ service.nom_service }}</h2>
+            <p>{{ service.description }}</p>
+
+            <button class="submit-btn-delete" (click)="deleteService(service._id)">Supprimer</button>
+            <button type="button" class="submit-btn-update" (click)="openUpdatePopup(service)">Update service</button>
+        </div>
+    </div>
+
+
+
+      }
+
+
+
+
+    </div>
+
+

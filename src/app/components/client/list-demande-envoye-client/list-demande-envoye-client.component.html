@@ -1,0 +1,99 @@
+<div class="background-overlay"  *ngIf="showPopup" (click)="closePopup()"></div>
+
+<div class="titre">
+  <h1>Liste des demande devis en attente </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getListdemandeEnvoyeSearch()">Search</button>
+  </div>
+</div>
+
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <span class="close-btn" (click)="closePopup()">&times;</span>
+    <h2>Confirmer devis</h2>
+
+
+    <h3>Services</h3>
+    <table>
+      <thead>
+        <tr>
+          <th> Service</th>
+          <th>Tarif</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of detailDevis?.services">
+          <td>{{ service.id_sous_service.nom_sous_service }}</td>
+          <td>{{ service.tarif | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Total Services :</strong> {{ detailDevis?.totalServices }} Ar</p>
+    <h3>Pièces</h3>
+    <table>
+      <thead>
+        <tr>
+          <th> Pièce</th>
+          <th>Quantité</th>
+          <th>Prix Unitaire</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let piece of detailDevis?.pieces">
+          <td>{{ piece.id_piece.nom_piece }}</td>
+          <td>{{ piece.quantite }}</td>
+          <td>{{ piece.prix_unitaire | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="totals">
+
+      <p><strong>Total Pièces :</strong> {{ detailDevis?.totalPieces}} Ar</p>
+      <p><strong>Total Devis :</strong> {{ detailDevis?.totalDevis  }} Ar</p>
+    </div>
+  </div>
+</div>
+
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date de demande</th>
+        <th>Problème</th>
+        <th>Immatriculation</th>
+        <th>Service</th>
+        <th>Sous service</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Itérer sur les réservations -->
+      <tr *ngFor="let demande of (demandeEnvoyeSearch.length > 0 ? demandeEnvoyeSearch : demandes)">
+
+        <td>{{ demande.date_demande | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ demande.probleme }}</td>
+        <td>{{ demande.vehicule.immatriculation }}</td>
+        <td>{{ demande.service_principal.nom }}</td>
+        <td>
+          <ul ngSkipHydration>
+            <li *ngFor="let sous_service of (demande.sous_services || [])">
+              {{ sous_service.nom }}
+            </li>
+            <!-- <li *ngIf="!demande.sous_services || demande.sous_services.length === 0">
+              Aucun sous-service disponible.
+            </li> -->
+          </ul>
+        </td>
+        <td>
+          <button type="button" class="submit-btn" (click)="openPopup(demande.id_demande)" >Voir devis</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
