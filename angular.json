@@ -12,14 +12,12 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend/browser",
+            "outputPath": "dist/frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
               {
                 "glob": "**/*",
                 "input": "public",
@@ -97,5 +95,7 @@
       }
     }
   },
-  "defaultProject": "frontend"
+  "cli": {
+    "analytics": "0470e4da-20f0-4fa5-bd0c-9ccfbb70466a"
+  }
 }
