@@ -15,10 +15,15 @@
           "options": {
             "outputPath": "dist/frontend",
             "index": "src/index.html",
+<<<<<<< Updated upstream
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
             ],
+=======
+            "main": "src/main.ts",
+            "polyfills": ["zone.js"],
+>>>>>>> Stashed changes
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
@@ -27,6 +32,7 @@
                 "output": "/"
               }
             ],
+<<<<<<< Updated upstream
             "styles": [
               "src/styles.css"
             ],
@@ -36,6 +42,11 @@
             "ssr": {
               "entry": "src/server.ts"
             }
+=======
+            "styles": ["src/styles.css"],
+            "scripts": [],
+            "browser": "src/main.ts" 
+>>>>>>> Stashed changes
           },
           "configurations": {
             "production": {
@@ -60,6 +71,7 @@
             }
           },
           "defaultConfiguration": "production"
+<<<<<<< Updated upstream
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -95,11 +107,10 @@
             ],
             "scripts": []
           }
+=======
+>>>>>>> Stashed changes
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "c3a739f7-0ab4-4d6b-ae5a-fd28aa5a7a10"
   }
 }
