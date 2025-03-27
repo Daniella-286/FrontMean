@@ -52,7 +52,6 @@ export class AjoutModelVoitureComponent {
     loadMarque(): void {
       this.marqueService.getData().subscribe(data => {
         this.marques = data;
-        console.log('marques chargées:', this.marques); // Vérifier les catégories après chargement
         //this.loadCompetence();  // Appeler loadArticles après que les catégories aient été chargées
       });
     }

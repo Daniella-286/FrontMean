@@ -41,7 +41,6 @@ export class GestionModelComponent {
     loadmodelList(): void {
       this.modelService.getData().subscribe(data => this.models =
       data);
-      console.log('models chargées:', this.models);
     }
         // Ouvrir le popup d'ajout
         openAddPopup() {

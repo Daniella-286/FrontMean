@@ -34,8 +34,7 @@
             "outputMode": "server",
             "ssr": {
               "entry": "src/server.ts"
-            },
-            "prerender": false
+            }
           },
           "configurations": {
             "production": {
@@ -98,5 +97,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c3a739f7-0ab4-4d6b-ae5a-fd28aa5a7a10"
   }
 }

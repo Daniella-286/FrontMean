@@ -29,12 +29,12 @@ export class ConnexionManagerComponent {
           console.log("✅ Réponse du serveur :", response);
 
           // Si la réponse contient un token, le stocker dans localStorage
-          if (response && response.token) {
+          if (typeof window !== 'undefined' && response && response.token) {
             localStorage.setItem('token', response.token);
             console.log('Token enregistré dans localStorage');
-
+    
             // Redirection vers la page services
-            this.router.navigate(['/gestion-service']);
+            this.router.navigate(['/services']);
           }
 
           // Réinitialiser le formulaire après une connexion réussie

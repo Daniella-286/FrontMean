@@ -47,7 +47,6 @@ export class ReservationParkingComponent {
     this.parkingService.getData().subscribe(
       (data) => {
         this.parkings = data;
-        console.log(" Liste des parkings chargée:", this.parkings);
       },
       (error) => {
         console.error(" Erreur lors du chargement des parkings :", error);
@@ -144,7 +143,6 @@ export class ReservationParkingComponent {
 }
 
             loadVehicules(): void {
-              console.log('miditra atoooo');
               this.vehiculeService.getData().subscribe(data => {
                 this.vehicules = data;
                 console.log('Vehicules chargées:', this.vehicules); // Vérifier les véhicules chargés
@@ -153,7 +151,6 @@ export class ReservationParkingComponent {
 
 
             loadReservtaion(): void {
-              console.log('miditra atoooo');
               this.reservationParkingService.getData().subscribe(data => {
                 this.reservations = data;
                 console.log('reservations chargées:', this.reservations); // Vérifier les véhicules chargés

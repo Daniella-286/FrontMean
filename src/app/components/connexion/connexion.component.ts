@@ -29,10 +29,10 @@ export class ConnexionComponent {
         console.log("✅ Réponse du serveur :", response);
 
         // Si la réponse contient un token, le stocker dans localStorage
-        if (response && response.token) {
+        if (typeof window !== 'undefined' && response && response.token) {
           localStorage.setItem('token', response.token);
           console.log('Token enregistré dans localStorage');
-
+  
           // Redirection vers la page services
           this.router.navigate(['/services']);
         }
