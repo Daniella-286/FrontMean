@@ -15,7 +15,7 @@
           "options": {
             "outputPath": "dist/frontend",
             "index": "src/index.html",
-            "main": "src/main.ts",
+            "main": "src/main.ts",   // C'est le point d'entrée pour l'application front-end
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -44,7 +44,7 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/frontend/server",
-            "main": "src/server.ts",  // Fichier de serveur SSR ici
+            "main": "src/main.server.ts",   // Utilisez main.server.ts pour le SSR
             "tsConfig": "tsconfig.server.json"
           }
         },
