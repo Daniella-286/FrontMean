@@ -27,7 +27,6 @@ export class AjoutVehiculeComponent {
   loadMarque(): void {
     this.marqueService.getData().subscribe(data => {
       this.marques = data;
-      console.log('Marques chargées:', this.marques);
     });
   }
 

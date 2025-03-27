@@ -15,12 +15,32 @@ export class DemandeDevisService {
     this.loadDemandeEnvoye();
     }
 
-  private getHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // Récupérer le token du localStorage
-    return new HttpHeaders({
-      'Authorization': `Bearer ${token}` // Ajouter le token dans l'Authorization
-    });
-  }
+    private getHeaders(): HttpHeaders {
+      if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('token'); // Récupérer le token du localStorage
+        return new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Ajouter le token dans l'Authorization
+        });
+      }
+      // Retourner des en-têtes par défaut ou vides en cas d'environnement non client (ex: serveur)
+      return new HttpHeaders({ 'Content-Type': 'application/json' });
+    }
+
+    // private getHeaders(): HttpHeaders {
+    //   let token = '';
+    
+    //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
+    //   if (typeof window !== 'undefined') {
+    //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
+    //   }
+    
+    //   return new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
+    //   });
+    // }
+    
 
   AddDemandeDevis(demande: FormData): Observable<any> {
     const headers = this.getHeaders(); // Appelle getHeaders() pour récupérer les en-têtes avec le token

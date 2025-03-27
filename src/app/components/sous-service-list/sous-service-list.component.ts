@@ -38,7 +38,6 @@ export class SousServiceListComponent {
     loadService(): void {
       this.serviceListService.getData().subscribe(data => {
         this.services = data;
-        console.log('service chargées retooo:', this.services); // Vérifier les catégories après chargement
        // this.loadService();  // Appeler loadArticles après que les catégories aient été chargées
       });
     }
@@ -46,7 +45,6 @@ export class SousServiceListComponent {
     getSousServiceByIdService(id: string): void {
       this.sousServiceService.getSousServiceByIdService(id).subscribe(data => {
         this.sous_services = data;
-        console.log('Sous-service chargées retooo:', this.services); // Vérifier les catégories après chargement
        // this.loadService();  // Appeler loadArticles après que les catégories aient été chargées
       });
     }

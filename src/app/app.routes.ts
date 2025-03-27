@@ -49,7 +49,7 @@ import { ServiceListComponent } from './components/service-list/service-list.com
 import { EmploisDuTempsMecanicienComponent } from './components/mecanicien/emplois-du-temps-mecanicien/emplois-du-temps-mecanicien.component';
 import { ListesTachesComponent } from './components/mecanicien/listes-taches/listes-taches.component';
 import { PlanningComponent } from './components/mecanicien/planning/planning.component';
-
+     
 
 
 

@@ -14,7 +14,7 @@ export class ConnexionManagerService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get(this.apiUrl, { headers });
   }
-  //localStorage.setItem('token', response.token)
+
   getConnexionManagerService(manager: any, headers?: HttpHeaders): Observable<any> {
 
     const httpOptions = {
