@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",  // Build classique de l'application Angular
-    "build:ssr": "ng build --prod && ng run frontend:server:production",  // Build SSR
-    "serve:ssr": "node dist/frontend/server/main"  // Serveur Node.js pour SSR
+    "build": "ng build",  
+    "build:ssr": "ng build --prod && ng run frontend:server:production",  
+    "serve:ssr": "node dist/frontend/server/main" 
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:frontend": "node dist/frontend/server/server.mjs"
