@@ -13,7 +13,12 @@ import { ConnexionManagerService } from '../../../services/connexion-manager.ser
 })
 export class ConnexionManagerComponent {
 
-  elementForm = { email: '', mdp: '' };
+
+  elementForm = {
+    email: 'admin@garage.com',  // Valeur par défaut pour l'email
+    mdp: 'motdepasse123'             // Valeur par défaut pour le mot de passe
+  };
+
     client: any[] = [];
     serverMessage: { text: string, class: string } = { text: '', class: '' }; // Ajouter une structure pour le message
 
@@ -32,7 +37,7 @@ export class ConnexionManagerComponent {
           if (typeof window !== 'undefined' && response && response.token) {
             localStorage.setItem('token', response.token);
             console.log('Token enregistré dans localStorage');
-    
+
             // Redirection vers la page services
             this.router.navigate(['/services']);
           }

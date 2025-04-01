@@ -1,6 +1,9 @@
 [build]
-  command = "npm run build:ssr"
-  publish = "dist/frontend"
+  base = "frontend"
+  publish = "dist/frontend/browser"
+  command = "ng build --configuration production"
 
-[[plugins]]
-  package = "@netlify/angular-runtime"
+[[redirects]]
+  from = "/"
+  to = "/connexion"
+  status = 200

@@ -1,19 +1,92 @@
-<div class="emploi-du-temps">
+<!-- <div *ngIf="emploiDuTemps.length > 0; else noData" class="emploi-du-temps">
   <h2>Emploi du Temps</h2>
   <table>
     <thead>
       <tr>
-        <th>Jour / Horaire</th>
-        <th *ngFor="let jour of jours">{{ jour }}</th>
+        <th>Heure</th>
+        <th *ngFor="let emploi of emploiDuTemps; let i = index">
+          {{ emploi.date_intervention_day }} : 
+          {{ emploi.date_intervention_formatted }}
+        </th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let horaire of horaires">
-        <td class="horaire">{{ horaire }}</td>
-        <td *ngFor="let jour of jours" class="cell">
-          {{ getCours(jour, horaire) }}
+      <tr *ngFor="let emploi of emploiDuTemps">
+        <td class="horaire">{{ emploi.date_intervention_formatted }}</td>
+        <td *ngFor="let emploi of emploiDuTemps">
+          <div *ngIf="emploi.date_intervention_formatted === emploi.date_intervention_formatted">
+            <span> Client : {{ emploi.id_rdv.id_client.nom }} {{ emploi.id_rdv.id_client.prenom }}</span>
+            <span> Véhicule : {{ emploi.id_vehicule.immatriculation }}</span>
+            <span> Durée : {{ emploi.duree_reparation }} Heures</span><br />
+          </div>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<ng-template #noData>
+  <p>Aucune donnée disponible pour le moment.</p>
+</ng-template> -->
+
+
+<!-- <div *ngIf="emploiDuTemps.length > 0; else noData" class="emploi-du-temps">
+  <h2>Emploi du Temps</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Heure</th>
+        <th *ngFor="let emploi of emploiDuTemps; let i = index">
+          {{ emploi.date_intervention_day }} : {{ emploi.date_intervention_formatted }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emploi of emploiDuTemps">
+        <td class="horaire">{{ emploi.date_intervention_formatted }}</td>
+        <td>
+          <div>
+            <span>Client : {{ emploi.id_rdv.id_client.nom }} {{ emploi.id_rdv.id_client.prenom }}</span><br />
+            <span>Véhicule : {{ emploi.id_vehicule.immatriculation }}</span><br />
+            <span>Durée : {{ emploi.duree_reparation }} Heures</span><br />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p>Aucune donnée disponible pour le moment.</p>
+</ng-template> -->
+
+
+<div *ngIf="emploiDuTemps.length > 0; else noData" class="emploi-du-temps">
+  <h2>Emploi du Temps</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Heure</th>
+        <th *ngFor="let emploi of emploiDuTemps">
+          {{ emploi.date_intervention_day }} : {{ emploi.date_intervention_formatted }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emploi of emploiDuTemps">
+        <td class="horaire">{{ emploi.date_intervention_formatted }}</td>
+        <td>
+          <div>
+            <span>Client : {{ emploi.id_rdv.id_client.nom }} {{ emploi.id_rdv.id_client.prenom }}</span><br />
+            <span>Véhicule : {{ emploi.id_vehicule.immatriculation }}</span><br />
+            <span>Durée : {{ emploi.duree_reparation }} Heures</span><br />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p>Aucune donnée disponible pour le moment.</p>
+</ng-template>

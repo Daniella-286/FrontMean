@@ -1,0 +1,85 @@
+<div class="background-overlay"></div>
+
+<div class="titre">
+  <h1>Liste des rendez-vous </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getListRendezVousConfirmByClientSearch()">Search</button>
+  </div>
+</div>
+<!-- <div *ngIf="message" class="error-message">
+  {{ message }}
+</div> -->
+<!-- <div *ngIf="message" class="alert" [ngClass]="{'alert-success': success, 'alert-danger': !success}">
+  {{ message }}
+</div> -->
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date de demande</th>
+        <th>Client</th>
+        <th>Date de rendez-vous</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Afficher les rendez-vous, soit les résultats de la recherche, soit les résultats par défaut -->
+      <tr *ngFor="let rdv of (rendezVousSearch.length > 0 ? rendezVousSearch : rendez_vous)">
+        <td>{{ rdv.date_prise_rendez_vous | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ rdv.id_client?.nom }}</td>
+        <td>{{ rdv.date_rendez_vous | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ rdv.statut }}</td>
+        <td>
+          <button type="button" class="submit-btn" (click)="openPopup(rdv)" >Intervenir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Afficher un message si aucun rendez-vous n'est trouvé -->
+  <p *ngIf="rendezVousSearch.length === 0 && rendez_vous.length === 0">Aucun rendez-vous trouvé.</p>
+</div>
+
+<!-- Deuxième popup (Rendez-vous) -->
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <span class="close-btn" (click)="closePopup()">&times;</span>
+    <form (ngSubmit)="AddInterventions()" #addInterventionForm="ngForm">
+      <div class="contain-input">
+        <div class="input-group">
+          <label for="id_mecanicien">Mécanicien</label>
+          <input type="text"
+                 name="id_mecanicien"
+                 id="id_mecanicien"
+                 placeholder="Entrez le mécanicien"
+                 [(ngModel)]="elementForm.id_mecanicien"
+                 (ngModelChange)="onMecanicienSearch()"
+                 required>
+
+          <!-- Affichage de la liste de suggestions -->
+          <ul *ngIf="mecanicienSearch.length > 0">
+            <li *ngFor="let mecanicien of mecanicienSearch" (click)="onMecanicienSelect(mecanicien)">
+              {{ mecanicien.nom }}
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="input-group">
+          <label for="duree_reparation">Duree </label>
+          <input type="number" name="duree_reparation"
+          id="duree_reparation" placeholder="Entrez le marque "
+          [(ngModel)]="elementForm.duree_reparation" required>
+        </div>
+      </div>
+      <button type="submit" class="submit-btn" [disabled]="addInterventionForm.invalid">Ajouter</button>
+    </form>
+  </div>
+</div>
+
+

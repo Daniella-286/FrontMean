@@ -7,7 +7,6 @@
 
       <form (ngSubmit)="AddVehicule()" #addvehicule="ngForm">
         <div class="contain-input">
-
           <!-- Sélection de la Marque -->
           <div class="input-group">
             <label for="id_marque">Marques :</label>
@@ -42,13 +41,22 @@
         </div>
 
         <div class="input-group">
-          <label for="couleur">couleur</label>
-          <input type="text" id="couleur" name="couleur" [(ngModel)]="elementForm.couleur" placeholder="Entrez votre année" required>
+          <label for="couleur">Couleur</label>
+          <input type="text" id="couleur" name="couleur" [(ngModel)]="elementForm.couleur" placeholder="Entrez votre couleur" required>
         </div>
 
-        <button type="submit" class="submit-btn" [disabled]="addvehicule.invalid">Ajouter</button>
+        <!-- Message d'erreur ou de succès -->
+        <div *ngIf="serverMessage.text.length > 0" [ngClass]="serverMessage.class" class="server-message">
+          {{ serverMessage.text }}
+        </div>
 
+        <!-- Option 1 : Bouton toujours actif -->
+        <button type="submit" class="submit-btn">Ajouter</button>
+
+        <!-- Option 2 : Bouton désactivé mais avec affichage du message d'erreur via la soumission -->
+        <!-- <button type="submit" class="submit-btn" [disabled]="addvehicule.invalid">Ajouter</button> -->
       </form>
+
     </div>
   </div>
 </div>

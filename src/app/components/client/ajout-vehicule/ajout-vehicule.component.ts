@@ -17,6 +17,7 @@ export class AjoutVehiculeComponent {
   vehicules: any[] = [];
   marques: any[] = [];
   modeles: any[] = [];
+  serverMessage: { text: string, class: string } = { text: '', class: '' };
 
   constructor(private vehiculeService: VehiculeService, private marqueService: MarqueService, private modelService: ModelService) {}
 
@@ -41,24 +42,57 @@ export class AjoutVehiculeComponent {
     }
   }
 
+  submitted: boolean = false;
+
   AddVehicule(): void {
+    this.submitted = true;  // Indique que le formulaire a été soumis
     console.log("📤 Données envoyées :", this.elementForm);
 
     if (!this.elementForm.id_marque || !this.elementForm.id_modele || !this.elementForm.immatriculation ||
-      !this.elementForm.annee || !this.elementForm.couleur) {
+        !this.elementForm.annee || !this.elementForm.couleur) {
       console.warn("⚠️ Formulaire incomplet :", this.elementForm);
+
+      // Affichage d'un message d'erreur
+      this.serverMessage = { text: 'Veuillez remplir tous les champs du formulaire.', class: 'error show' };
+
+      setTimeout(() => {
+        this.serverMessage = { text: '', class: '' };
+      }, 3000);
+
       return;
     }
 
+    // Si le formulaire est complet, on procède à l'ajout du véhicule
     this.vehiculeService.addVehicule(this.elementForm).subscribe(
       response => {
         console.log("✅ Réponse du serveur :", response);
-        this.elementForm = { id_marque: '', id_modele: '', immatriculation: '', annee: '' ,couleur:''};
-        this.modeles = []; // Réinitialiser la liste des modèles
+
+        if (response && response.message) {
+          this.serverMessage = { text: response.message, class: 'success show' };
+        } else {
+          this.serverMessage = { text: 'Demande envoyée avec succès.', class: 'success show' };
+        }
+
+        this.elementForm = { id_marque: '', id_modele: '', immatriculation: '', annee: '', couleur: '' };
+        this.submitted = false;
+
+        setTimeout(() => {
+          this.serverMessage = { text: '', class: '' };
+        }, 3000);
+
+        this.modeles = [];
       },
       error => {
         console.error("❌ Erreur lors de l'ajout :", error);
+
+        const errorMessage = error.error?.message || "Erreur lors de l'ajout de la demande.";
+        this.serverMessage = { text: errorMessage, class: 'error show' };
+
+        setTimeout(() => {
+          this.serverMessage = { text: '', class: '' };
+        }, 3000);
       }
     );
   }
+
 }

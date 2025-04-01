@@ -1,77 +1,156 @@
 <div class="titre">
-  <h1>Planning d'intervention  </h1>
+  <h1>Planning d'intervention</h1>
   <div class="input-group">
-    <label for="parking">Research</label>
-    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
-    <button type="button" class="submit-btn" (click)="getListdemandeClientToManagerSearch()">Search</button>
+    <label for="date">Date</label>
+    <input type="date" id="date" [(ngModel)]="searchForm.date"> <!-- 🔹 Modification ici -->
+    
+    <button type="button" class="submit-btn" (click)="getListPlanningSearch()">Rechercher</button>
   </div>
 </div>
 
-<!-- <div>
-  <table>
-    <thead>
-      <tr>
-        <th>Heure </th>
-        <th>Date</th>
-        <th>Vehicule</th>
-        <th>Durée d'intervention</th>
-        <th>Fin d'intervention</th>
-        <th>Sous service</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let demande of (demandeClientSearch.length > 0 ? demandeClientSearch : demandes)">
-        <td>{{ demande.id_demande }}</td>
-        <td>{{ demande.date_demande }}</td>
-        <td>{{ demande.probleme }}</td>
-        <td>{{ demande.vehicule.immatriculation }}</td>
-        <td>{{ demande.service_principal.nom }}</td>
-        <td>{{ demande.service_principal.nom }}</td>
-        <td>
-          <button type="button" class="submit-btn">envoyer</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div> -->
-
-
 <div>
-  <table>
+  <table *ngIf="interventions.length > 0; else noData">
     <thead>
       <tr>
-        <th>Heure</th>
-        <th>Date</th>
+        <th>Début d'intervention</th>
+        <th>Durée</th>
         <th>Véhicule</th>
-        <th>Durée d'intervention</th>
-        <th>Fin d'intervention</th>
-        <th>Sous service</th>
-        <th>Action</th>
+        <th>Client</th>
+        <th>Avancement</th>
+        <th>Tâches</th> <!-- Nouvelle colonne pour les tâches -->
+        <th>Modifier Avancement</th> 
+        <th>Ajouter Pièces</th> 
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let entry of tasksData | keyvalue">
-        <td>08:30</td>
-        <td>2025-03-25</td>
-        <td>{{ entry.key }}</td>
-        <td>1h 30min</td>
-        <td>10:00</td>
-        <td>Maintenance moteur</td>
+      <tr *ngFor="let intervention of interventions">
+        <td>{{ intervention.date_intervention | date: 'dd/MM/yyyy HH:mm' : 'UTC' }}</td>
+        <td>{{ intervention.duree_reparation }} heures</td>
+        <td>{{ intervention.vehicule.immatriculation }} ({{ intervention.vehicule.marque }} {{ intervention.vehicule.modele }})</td>
+        <td>{{ intervention.client.nom }} {{ intervention.client.prenom }}</td>
+        <td>{{ intervention.avancement }}</td>
         <td>
-          <button type="button" class="submit-btn" (click)="openPopup(entry.key)">Voir Tâche</button>
+          <button type="button" class="submit-btn" (click)="showTasks(intervention.id_intervention)">Voir les tâches</button> <!-- Le bouton pour voir les tâches -->
+        </td>
+        <td>
+          <button type="button" class="submit-btn" (click)="openUpdateStatusPopup(intervention)">Modifier Avancement</button> <!-- Bouton pour modifier l'avancement -->
+        </td>
+        <td>
+          <button type="button" class="submit-btn" (click)="openAddPiecePopup(intervention.id_intervention)">Ajouter une pièce</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- Popup -->
-<div *ngIf="showPopup" class="popup-overlay">
-  <div class="popup">
-    <h2>Liste des tâches</h2>
-    <ul>
-      <li *ngFor="let task of selectedTasks">{{ task }}</li>
-    </ul>
-    <button (click)="closePopup()">Fermer</button>
+<ng-template #noData>
+  <p class="message">{{ message }}</p>
+</ng-template>
+
+
+<!-- Popup pour afficher les tâches -->
+<div class="popup" *ngIf="showPopupTasks">
+  <div class="popup-content">
+    <span class="close-btn" (click)="closePopupTasks()">&times;</span>
+    
+    <!-- Titre -->
+    <h2>Tâches de l'intervention</h2>
+    
+    <!-- Tableau pour les tâches -->
+    <div class="table-container">
+      <table class="tasks-table">
+        <thead>
+          <tr>
+            <th>Nom de la tâche</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{ task.nom }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Pièces à utiliser</h2>
+    
+    <!-- Tableau pour les pièces -->
+    <div class="table-container">
+      <table class="pieces-table">
+        <thead>
+          <tr>
+            <th>Nom de la pièce</th>
+            <th>Quantité</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let piece of pieces">
+            <td>{{ piece.nom }}</td>
+            <td>{{ piece.quantite }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Popup pour modifier l'avancement -->
+<div class="popup-status" *ngIf="showPopupStatus">
+  <div class="popup-content2">
+    <span class="close-btn" (click)="closeUpdateStatusPopup()">&times;</span>
+    <h2>Modifier l'avancement de l'intervention</h2>
+
+    <p *ngIf="message" class="warning">{{ message }}</p> <!-- Message bien positionné -->
+
+    <form (ngSubmit)="updateStatus()">
+      <div class="form-group">
+        <label for="status">Statut de l'intervention</label>
+        <select id="status" [(ngModel)]="selectedStatus" name="status" required>
+          <option value="Début">Début</option>
+          <option value="En cours">En cours</option>
+          <option value="Terminé">Terminé</option>
+        </select>
+      </div>
+      
+      <button type="submit" class="submit-btn">Mettre à jour</button>
+    </form>
+  </div>
+</div>
+
+
+<!-- Popup pour ajouter une pièce à l'intervention -->
+<div class="popup" *ngIf="showPopupAddPiece">
+  <div class="popup-content">
+    <span class="close-btn" (click)="closeAddPiecePopup()">&times;</span>
+    
+    <h2>Ajouter une pièce à l'intervention</h2>
+    
+    <form (ngSubmit)="addPieceToIntervention()">
+      
+      <!-- Sélection du sous-service -->
+      <div class="form-group">
+        <label for="sousService">Sous-service</label>
+        <select id="sousService" [(ngModel)]="selectedSousService" name="sousService" (change)="loadPiecesBySousService()" required>
+          <option *ngFor="let ss of sousServices" [value]="ss._id">{{ ss.nom_sous_service }}</option>
+        </select>
+      </div>
+      
+      <!-- Liste des pièces associées au sous-service choisi -->
+      <div class="form-group" *ngIf="pieces.length > 0">
+        <label>Pièce</label>
+        <div *ngFor="let piece of pieces">
+          <input type="radio" name="piece" [(ngModel)]="selectedPiece" [value]="piece.id"> {{ piece.nom }}
+        </div>
+      </div>
+      
+      <!-- Quantité à utiliser -->
+      <div class="form-group">
+        <label for="quantite">Quantité</label>
+        <input type="number" id="quantite" [(ngModel)]="quantite" name="quantite" min="1" required>
+      </div>
+      
+      <button type="submit" class="submit-btn">Ajouter</button>
+    </form>
   </div>
 </div>

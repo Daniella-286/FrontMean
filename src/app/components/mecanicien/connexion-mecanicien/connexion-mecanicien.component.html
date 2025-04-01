@@ -1,0 +1,42 @@
+<div class="background-overlay"></div>
+
+<div class="connexion-container">
+  <div class="connexion">
+    <div class="connexion-description">
+      <h2>Connexion</h2>
+
+      <!-- Afficher le message du serveur (succès ou erreur) -->
+      <div *ngIf="serverMessage.text" [ngClass]="serverMessage.class" class="server-message">
+        {{ serverMessage.text }}
+      </div>
+
+      <form (ngSubmit)="getConnexionManager()" #connexionForm="ngForm">
+        <div class="input-group">
+          <label for="email">Nom d'utilisateur</label>
+          <input  type="text"
+                  id="email"
+                  name="email"
+                  placeholder="Entrez votre nom d'utilisateur"
+                  [(ngModel)]="elementForm.email"
+                  required>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Mot de passe</label>
+          <input type="password"
+                 id="mdp"
+                 name="mdp"
+                 placeholder="Entrez votre mot de passe"
+                 [(ngModel)]="elementForm.mdp"
+                 required>
+        </div>
+
+        <button type="submit" [disabled]="connexionForm.invalid" class="submit-btn">Se connecter</button>
+
+        <div class="forgot-password">
+          <a href="#">Mot de passe oublié ?</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

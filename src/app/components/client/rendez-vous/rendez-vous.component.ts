@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ParkingService } from '../../../services/parking.service';
-import { ReservationParkingService } from '../../../services/reservation-parking.service';
 
 @Component({
   selector: 'app-rendez-vous',
@@ -41,7 +38,7 @@ export class RendezVousComponent {
   //           || !this.elementForm.date_debut || !this.elementForm.date_fin
   //           || !this.elementForm.tarif_den
   //             ) {
-  //           console.warn("⚠️ Formulaire incomplet :", this.elementForm);
+  //           console.warn(" Formulaire incomplet :", this.elementForm);
   //           return;
   //         }
 
@@ -49,8 +46,8 @@ export class RendezVousComponent {
 
   //         this.parkingService.addParking(this.elementForm, headers).subscribe(
   //           response => {
-  //             console.log("✅ Réponse du serveur :", response); // 🔍 Voir si le backend répond bien
-  //             console.log("📤 Données envoyées au serveur :", JSON.stringify(this.elementForm));
+  //             console.log(" Réponse du serveur :", response); // 🔍 Voir si le backend répond bien
+  //             console.log(" Données envoyées au serveur :", JSON.stringify(this.elementForm));
 
   //             // 🔹 OU (meilleure approche) : Recharger toute la liste depuis le serveur
   //             this.loadParkingList();
@@ -60,7 +57,7 @@ export class RendezVousComponent {
   //             this.showPopup = false;
   //           },
   //           error => {
-  //             console.error("❌ Erreur lors de l'ajout :", error); // 🔍 Afficher les erreurs possibles
+  //             console.error(" Erreur lors de l'ajout :", error); // 🔍 Afficher les erreurs possibles
   //           }
   //         );
   //       }

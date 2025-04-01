@@ -1,0 +1,108 @@
+<div class="facture-container">
+    <h2>Liste des Factures du Jour</h2>
+  
+    <!-- Barre de recherche -->
+    <div class="search-bar">
+      <input type="text" [(ngModel)]="numeroFacture" placeholder="Rechercher par numéro de facture" class="search-input">
+      <button (click)="searchFacture()">Rechercher</button>
+    </div>
+  
+    <!-- Tableau des factures -->
+    <table *ngIf="factures.length > 0">
+      <thead>
+        <tr>
+          <th>Numéro</th>
+          <th>Date</th>
+          <th>Montant</th>
+          <th>Actions</th>
+          <th>Paiment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facture of factures">
+          <td>{{ facture.numero_facture }}</td>
+          <td>{{ facture.date_facture | date: 'dd/MM/yyyy HH:mm'  :'UTC' }}</td>
+          <td>{{ facture.total }} ARIARY</td>
+          <td>
+            <button type="button" class="submit-btn" (click)="voirDetailFacture(facture._id)">Voir Détails</button>
+          </td>
+          <td>
+            <button type="button" class="submit-btn" (click)="ouvrirPopupPaiement(facture)">Effectuer Paiement</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Message si aucune facture trouvée -->
+    <p *ngIf="factures.length === 0">Aucune facture disponible.</p>
+  
+    <!-- Pagination -->
+    <div class="pagination">
+      <button (click)="changePage(false)" [disabled]="page === 1">Précédent</button>
+      <span>Page {{ page }} / {{ totalPages }}</span>
+      <button (click)="changePage(true)" [disabled]="page === totalPages">Suivant</button>
+    </div>
+  </div>
+  
+
+  <!-- Popup de détails de la facture -->
+<div class="popup" *ngIf="showPopup">
+    <div class="popup-content">
+      <span class="close" (click)="fermerPopup()">&times;</span>
+      <h3>Détails de la Facture</h3>
+      <p><strong>Numéro:</strong> {{ factureDetails.facture.numero_facture }}</p>
+      <p><strong>Date:</strong> {{ factureDetails.facture.date_facture | date: 'dd/MM/yyyy HH:mm' :'UTC' }}</p>
+      <p><strong>Total:</strong> {{ factureDetails.total_facture }} ARIARY</p>
+  
+      <h4>Services:</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Tarif</th>
+            <th>Sous-total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of factureDetails.details_services">
+            <td>{{ service.nom }}</td>
+            <td>{{ service.tarif }} ARIARY</td>
+            <td>{{ service.sous_total }} ARIARY</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <h4>Pièces utilisées:</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Quantité</th>
+            <th>Prix Unitaire</th>
+            <th>Sous-total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let piece of factureDetails.details_pieces">
+            <td>{{ piece.nom }}</td>
+            <td>{{ piece.quantite }}</td>
+            <td>{{ piece.prix_unitaire }} ARIARY</td>
+            <td>{{ piece.sous_total }} ARIARY</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<!-- Popup de paiement -->
+<div class="popup2" [class.show]="showPopupPaiement">
+    <div class="popup-content2">
+      <span class="close2" (click)="fermerPopupPaiement()">&times;</span>
+      <h3>Effectuer le Paiement</h3>
+      <form (submit)="effectuerPaiement()">
+        <label for="montant">Montant total payé :</label>
+        <input type="number" id="montant" [(ngModel)]="montantPaiement" name="montant" required>
+        <button type="submit" class="submit-btn" >Payer</button>
+      </form>
+    </div>
+  </div>

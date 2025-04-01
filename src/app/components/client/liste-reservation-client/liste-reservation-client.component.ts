@@ -18,6 +18,12 @@ export class ListeReservationClientComponent implements OnInit {
     date_fin: ''
   }
 
+  currentPage: number = 1; // Page courante
+  pageSize: number = 5; // Nombre d'éléments par page
+  totalItems: number = 0; // Nombre total d'éléments
+
+
+
   constructor(private reservationParkingService: ReservationParkingService) {}
 
   ngOnInit(): void {
@@ -72,6 +78,20 @@ export class ListeReservationClientComponent implements OnInit {
         this.message = "Erreur lors du chargement des réservations.";
       }
     );
+    this.totalItems = this.reservations.length; // Met à jour le nombre total d'éléments
+    this.paginate(); // Applique la pagination
+  }
+
+  paginate(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.reservationSearch = this.reservationSearch.slice(startIndex, endIndex);
+  }
+
+  // Fonction pour la page suivante
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.paginate();
   }
 
   confirmReservation(id_reservation: string): void {

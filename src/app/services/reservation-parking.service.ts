@@ -25,18 +25,18 @@ export class ReservationParkingService {
 
   // private getHeaders(): HttpHeaders {
   //   let token = '';
-  
+
   //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
   //   if (typeof window !== 'undefined') {
   //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
   //   }
-  
+
   //   return new HttpHeaders({
   //     'Content-Type': 'application/json',
   //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
   //   });
   // }
-  
+
 
   getData(): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -114,6 +114,25 @@ export class ReservationParkingService {
      // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       return this.http.get(`${this.apiUrl}/confirmees`, { headers: this.getHeaders() });
     }
+
+    getReservationConfirmerSearch(dateDebut: string, dateFin: string) {
+      // Convertir les dates en format 'YYYY-MM-DD'
+      const dateDebutFormatted = this.formatDate(dateDebut);
+      const dateFinFormatted = this.formatDate(dateFin);
+
+      // Créer les paramètres pour la requête HTTP
+      const params = new HttpParams()
+        .set('date_debut', dateDebutFormatted)
+        .set('date_fin', dateFinFormatted);
+
+      // Faire la requête HTTP GET avec les paramètres et les headers
+      return this.http.get(`${this.apiUrl}/confirmees`, {
+        params: params,
+        headers: this.getHeaders()
+      });
+    }
+
+
 
     getAllReservationSearch(dateDebut: string, dateFin: string) {
       // Convertir les dates en format 'YYYY-MM-DD'

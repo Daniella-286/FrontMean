@@ -1,0 +1,28 @@
+<div class="stock-container">
+    <h2>Stock Restant</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nom de la pièce</th>
+          <th>Prix Unitaire</th>
+          <th>Stock Restant</th>
+          <th>Date de Consultation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of stockRestant" [class.critique]="isStockCritique(item.stock_restant)">
+          <td>{{ item.nom_piece }}</td>
+          <td>{{ item.prix_unitaire | number:'1.2-2'  }} Ariary</td>
+          <td>{{ item.stock_restant }}</td>
+          <td>{{ item.date_consultation | date: 'dd/MM/yyyy HH:mm'  :'UTC'  }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button (click)="previousPage()" [disabled]="page === 1">Précédent</button>
+      <span>Page {{ page }} / {{ totalPages }}</span>
+      <button (click)="nextPage()" [disabled]="page === totalPages">Suivant</button>
+    </div>
+  </div>
+  

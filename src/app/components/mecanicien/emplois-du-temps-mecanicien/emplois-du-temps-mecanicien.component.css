@@ -1,44 +1,85 @@
 .emploi-du-temps {
-  width: 80%;
-  margin: auto;
+  width: 90%;
+  margin: 20px auto;
   text-align: center;
-  margin-top: 95px;
 }
 
 h2 {
-  text-align: center;
+  font-size: 28px;
+  color: #333;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 20px;
 }
 
 th, td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 12px;
   text-align: center;
+  vertical-align: middle;
 }
 
 th {
-  background-color: #31c5b5;
+  background-color: #4CAF50;
   color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.jour {
-  background-color: #ecf0f1;
+.horaire {
+  font-weight: bold;
+  color: #333;
+}
+
+td {
+  font-size: 14px;
+  color: #555;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .emploi-du-temps {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 8px;
+  }
+}
+
+td span {
+  display: block;
+  margin-top: 5px;
+  color: #444;
+  font-size: 13px;
+}
+
+td .duree {
   font-weight: bold;
 }
 
-.cell {
-  height: 50px;
-  min-width: 120px;
-}
-
-.cell:not(:empty) {
-  background-color: #49c545d1;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
+td .avancement {
+  color: #007bff;
 }

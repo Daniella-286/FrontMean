@@ -42,7 +42,7 @@
           </div>
           <div class="contain-input">
 
-            <div class="input-group">
+            <!-- <div class="input-group">
               <label for="service">Service :</label>
               <select name="service" [(ngModel)]="elementForm.id_service" required >
                 <option value="default" selected>-- Sélectionnez une option --</option>
@@ -50,7 +50,7 @@
                   <option value="{{service._id}}" >{{service.nom_service}}</option>
                 }
               </select>
-            </div>
+            </div> -->
 
             <div class="input-group">
               <label for="contact">Contact</label>
@@ -67,6 +67,11 @@
             <div class="input-group">
               <label for="mdp">Mot de passe</label>
               <input type="password" name="mdp" [(ngModel)]="elementForm.mdp" id="mdp" placeholder="Entrez votre mot de passe" required>
+            </div>
+
+            <div class="input-group">
+              <label for=" confirmMdp">Mot de passe de confirmation</label>
+              <input type="password" name=" confirmMdp" [(ngModel)]="elementForm.confirmMdp" id=" confirmMdp" placeholder="Entrez votre mot de passe" required>
             </div>
           </div>
         </div>

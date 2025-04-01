@@ -31,7 +31,7 @@ export class GestionSousServiceComponent {
           }
 
             loadService(): void {
-              this.serviceListService.getData().subscribe(data => {
+              this.serviceListService.getListesService().subscribe(data => {
                 this.services = data;
                // this.loadService();  // Appeler loadArticles après que les catégories aient été chargées
               });

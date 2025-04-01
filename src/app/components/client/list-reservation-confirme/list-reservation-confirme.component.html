@@ -1,5 +1,11 @@
 <div class="titre">
   <h1>Liste des réservations confirmé </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getReservationConfirmerSearch()">Search</button>
+  </div>
 
 </div>
 <div>
@@ -22,4 +28,10 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} sur {{ totalItems / pageSize  }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * pageSize >= totalItems">Next</button>
 </div>

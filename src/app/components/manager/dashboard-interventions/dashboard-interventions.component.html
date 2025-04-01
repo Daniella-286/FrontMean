@@ -1,0 +1,17 @@
+<div class="dashboard-container">
+    <h2>Statistique des intereventions terminées</h2>
+    <!-- Barre de recherche -->
+    <div class="search-box">
+        <label for="annee">Choisir une année :</label>
+        <input type="number" id="annee" [(ngModel)]="annee" (change)="loadStatistiques()" min="2000" max="2100">
+    </div>
+
+    <!-- Graphique -->
+    <div class="chart-container">
+        <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="barChartType">
+        </canvas>
+    </div>
+</div>

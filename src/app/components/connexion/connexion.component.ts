@@ -32,7 +32,7 @@ export class ConnexionComponent {
         if (typeof window !== 'undefined' && response && response.token) {
           localStorage.setItem('token', response.token);
           console.log('Token enregistré dans localStorage');
-  
+
           // Redirection vers la page services
           this.router.navigate(['/services']);
         }
@@ -49,4 +49,5 @@ export class ConnexionComponent {
         this.serverMessage = { text: errorMessage, class: 'error' }; // Message d'erreur
       });
   }
+
 }

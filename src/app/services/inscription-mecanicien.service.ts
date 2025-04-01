@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InscriptionMecanicienService {
-  private apiUrl = `https://backmean.onrender.com/api/mecaniciens/non-valides`;
+  private apiUrl = `https://backmean.onrender.com/api/users/register/mecanicien`;
 
   constructor(private http: HttpClient) { }
 
@@ -19,9 +19,5 @@ export class InscriptionMecanicienService {
     return this.http.post<any>(this.apiUrl, mecanicien , httpOptions);
   }
 
-  // getData(): Observable<any> {
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  //   return this.http.get(this.apiUrl, { headers });
-  // }
 
 }

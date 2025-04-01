@@ -1,0 +1,36 @@
+.dashboard-container {
+    max-width: 900px; /* Légèrement plus large */
+    margin: 100px auto; /* Augmenter l'espace en haut pour éviter l'overlap */
+    text-align: center;
+    background: #fff;
+    padding: 30px; /* Plus d'espace intérieur */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+.search-box {
+    margin-bottom: 30px; /* Plus d'espace entre la recherche et le graphique */
+    position: relative;
+    z-index: 1000;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 350px; /* Un peu plus grand */
+    padding: 12px; /* Un peu plus de padding */
+    font-size: 18px; /* Texte plus grand */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+    width: 100%;
+    max-width: 800px; /* Augmenter la largeur */
+    height: 400px; /* Augmenter la hauteur */
+    margin: auto;
+    padding-top: 30px; /* Descendre le graphique */
+    padding-bottom: 30px; /* Ajouter de l’espace en bas */
+}
