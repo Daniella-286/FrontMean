@@ -41,3 +41,10 @@
     </tbody>
   </table>
 
+  <!-- Pagination -->
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} sur {{ totalItems / pageSize  }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * pageSize >= totalItems">Next</button>
+</div>
+

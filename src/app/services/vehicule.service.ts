@@ -21,26 +21,33 @@ export class VehiculeService {
     // Retourner des en-têtes par défaut ou vides en cas d'environnement non client (ex: serveur)
     return new HttpHeaders({ 'Content-Type': 'application/json' });
   }
-  
+
 
   // private getHeaders(): HttpHeaders {
   //   let token = '';
-  
+
   //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
   //   if (typeof window !== 'undefined') {
   //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
   //   }
-  
+
   //   return new HttpHeaders({
   //     'Content-Type': 'application/json',
   //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
   //   });
   // }
-  
+
 
   getData(): Observable<any> {
     return this.http.get(this.apiUrl, { headers: this.getHeaders() });
   }
+
+  getVehiculeSearch(immatriculation: string): Observable<any> {
+    console.log("🚗 Envoi requête GET avec immatriculation :", immatriculation);
+    return this.http.get<any>(`${this.apiUrl}?search=${immatriculation}`, { headers: this.getHeaders() });
+  }
+
+
 
   addVehicule(vehicule: any): Observable<any> {
     console.log("🚗 Données envoyées :", vehicule);

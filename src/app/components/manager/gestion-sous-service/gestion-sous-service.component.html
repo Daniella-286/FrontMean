@@ -24,13 +24,12 @@
 
           <div class="input-group">
             <label for="marque">Service :</label>
-            <select name="marque" [(ngModel)]="elementForm.id_service" required >
+            <select name="marque" [(ngModel)]="elementForm.id_service" required>
               <option value="default" selected>-- Sélectionnez une option --</option>
-              @for (service of services; track $index) {
-                <option value="{{service._id}}" >{{service.nom_service}}</option>
-              }
+              <option *ngFor="let service of services" [value]="service._id">{{ service.nom_service }}</option>
             </select>
           </div>
+
 
           <div class="input-group">
             <label for="tarif">tarif</label>
@@ -77,10 +76,10 @@
     <div class="service" *ngFor="let sous_service of sous_services;">
       <div class="service-description">
         <h2>{{ sous_service.nom_sous_service }}</h2>
-        <p>{{ sous_service.id_service }}</p>
+        <p>{{ sous_service.id_service.nom_service }}</p>
         <p>{{ sous_service.tarif }}</p>
       </div>
-      <button (click)="deleteSousService(sous_service._id)">Supprimer</button>
+      <button class="submit-btn-delete" (click)="deleteSousService(sous_service._id)">Supprimer</button>
       <button type="button" class="submit-btn" (click)="openUpdatePopup(sous_service)">Update</button>
     </div>
 

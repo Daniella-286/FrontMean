@@ -1,8 +1,32 @@
 <div class="menu-admin">
   <ul>
-      <li><a href="/connexion">Connexion</a></li>
+
       <li class="has-submenu">
-        <a href="#">Sertvice et sous service</a>
+        <a href="#">Authentification</a>
+        <ul class="submenu">
+          <li><a href="/connexion">Connexion</a></li>
+          <li><a href="/connexion-mecanicien">Connexion mecanicien</a></li>
+          <li><a href="/inscription-mecanicien">Inscription mecanicien </a></li>
+        </ul>
+      </li>
+
+      <li class="has-submenu">
+        <a href="#">Mecanicien</a>
+        <ul class="submenu">
+          <li><a href="/gestion-mecanicien">Gestion Mecanicien</a></li>
+          <li><a href="/list-mecanicien-disponible">Liste des mécaniciens dispo</a></li>
+        </ul>
+      </li>
+
+      <li class="has-submenu">
+        <a href="#">Intervention</a>
+        <ul class="submenu">
+          <li><a href="/gestion-intervention">Gestion Intervention</a></li>
+        </ul>
+      </li>
+
+      <li class="has-submenu">
+        <a href="#">Service et sous service</a>
         <ul class="submenu">
           <li><a href="/gestion-service">Services</a></li>
           <li><a href="/gestion-sous-service">Gestion sous-service</a></li>
@@ -15,6 +39,17 @@
           <li><a href="/statistique-reparation-par-mois">Statistique des réparations </a></li>
         </ul>
       </li>
+
+      <li class="has-submenu">
+        <a href="#">Dashboard</a>
+        <ul class="submenu">
+          <li><a href="/gestion-rendez-vous">Liste des rendez vous</a></li>
+         
+        </ul>
+      </li>
+
+
+
 <!--
       <li class="has-submenu">
         <a href="#">Stock</a>
@@ -56,6 +91,60 @@
           <li><a href="/gestion-demande-devis">Gestion demande devis</a></li>
         </ul>
       </li>
+
+
+
+
+
+      <li><a href="/connexion">Connexion</a></li>
+      <li><a href="/services">Services</a></li>
+
+
+      <li class="has-submenu">
+        <a href="#">Véhicules  <i class="fa fa-chevron-down"></i></a>
+        <ul class="submenu">
+          <li><a href="/ajout-vehicule">Ajout</a></li>
+          <li><a href="/gestion-vehicule">Gestion véhicule</a></li>
+        </ul>
+      </li>
+
+      <li class="has-submenu">
+        <a href="#">Intervention</a>
+        <ul class="submenu">
+          <li><a href="/list-intervention-client">Liste intervention</a></li>
+        </ul>
+      </li>
+
+
+      <li class="has-submenu">
+        <a href="#">Rendez-vous  <i class="fa fa-chevron-down"></i></a>
+        <ul class="submenu">
+          <li><a href="/list-rendez-vous-client">Listes rendez-vous </a></li>
+          <li><a href="/list-rendez-vous-client-confirmer">Listes rendez-vous confirmer</a></li>
+        </ul>
+      </li>
+
+
+      <li><a href="/gestion-client-inscrits">Listes clients</a></li>
+
+      <li class="has-submenu">
+        <a href="#">Devis  <i class="fa fa-chevron-down"></i></a>
+        <ul class="submenu">
+          <li><a href="/demande-devis-client">Demande devis</a></li>
+      <li><a href="/list-demande-attente-client">Demande en Attente</a></li>
+      <li><a href="/list-demande-envoye-client">Demande envoyé</a></li>
+        </ul>
+      </li>
+
+      <li class="has-submenu">
+        <a href="#">Réservations <i class="fa fa-chevron-down"></i></a>
+        <ul class="submenu">
+          <li><a href="/reservation-parking">Réservation Parking</a></li>
+          <li><a href="/list-reservation-client">Réservation envoyé</a></li>
+          <li><a href="/list-reservation-confirme">Réservation Validé</a></li>
+        </ul>
+      </li>
+
 
 
   </ul>

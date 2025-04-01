@@ -1,0 +1,60 @@
+<div class="background-overlay"></div>
+
+<div class="titre">
+  <h1>Liste des rendez-vous </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="datetime-local" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_intervention" required>
+    - <input type="number" name="duree" id="duree" [(ngModel)]="elementSearchForm.duree_reparation" required>
+      <div class="input-group">
+              <label for="service">Service :</label>
+              <select name="service" [(ngModel)]="elementSearchForm.id_service" required >
+                <option value="default" selected>-- Sélectionnez une option --</option>
+                @for (service of services; track $index) {
+                  <option value="{{service._id}}" >{{service.nom_service}}</option>
+                }
+              </select>
+            </div>
+    <button type="button" class="submit-btn" (click)="getListMecanicienDisponibleSearch(elementSearchForm.date_intervention , elementSearchForm.duree_reparation ,
+      elementSearchForm.id_service
+    )">Search</button>
+  </div>
+</div>
+<!-- <div *ngIf="message" class="error-message">
+  {{ message }}
+</div> -->
+<!-- <div *ngIf="message" class="alert" [ngClass]="{'alert-success': success, 'alert-danger': !success}">
+  {{ message }}
+</div> -->
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>contact</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+
+      <!-- Afficher les rendez-vous, soit les résultats de la recherche, soit les résultats par défaut -->
+        <tr *ngFor="let mecanicien of (mecanicienSearch.length > 0 ? mecanicienSearch : mecaniciens)">
+
+        <td>{{ mecanicien.nom }}</td>
+        <td>{{ mecanicien.prenom }}</td>
+        <td>{{ mecanicien.contact }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Afficher un message si aucun rendez-vous n'est trouvé -->
+  <p *ngIf="mecanicienSearch.length === 0 && mecaniciens.length === 0">Aucun mecanicien trouvé.</p>
+</div>
+
+

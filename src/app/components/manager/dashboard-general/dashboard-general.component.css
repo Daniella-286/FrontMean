@@ -1,0 +1,62 @@
+.dashboard-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin-top: 80px; /* Pour éviter d'être caché par le menu */
+}
+
+/* Style des cartes */
+.stat-card {
+    background: linear-gradient(135deg, #19ddd0, #008080);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 220px;
+    color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Effet de survol */
+.stat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Effet d'animation interne */
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 250%;
+    height: 250%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(25deg);
+    transition: 0.5s;
+}
+
+/* Animation au passage de la souris */
+.stat-card:hover::before {
+    top: -30%;
+    left: -30%;
+}
+
+/* Titre des statistiques */
+.stat-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+/* Valeur des statistiques */
+.stat-card p {
+    font-size: 28px;
+    font-weight: bold;
+    color: #FFD700;
+}

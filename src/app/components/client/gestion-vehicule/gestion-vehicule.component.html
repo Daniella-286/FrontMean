@@ -4,9 +4,16 @@
   <div class="piece">
     <div class="piece">
       <h2>Gestion véhicules</h2>
+
+          <!-- Immatriculation -->
+          <div class="input-group">
+            <label for="immatriculation">Immatriculation</label>
+            <input type="text" name="immatriculation" [(ngModel)]="vehiculeSearchForm.immatriculation" id="immatriculation" placeholder="Entrez votre immatriculation" required>
+          </div>
+          <button class="submit-btn-delete" (click)="getVehiculeSearch()">Rechercher</button>
+
     </div>
   </div>
-
 
   <!-- Popup pour la mise à jour -->
   <div class="popup" *ngIf="showUpdatePopup">
@@ -59,81 +66,42 @@
   </div>
 
   <!-- Liste des vehiculee -->
+
   <div class="vehicule-list">
+    <div class="service" *ngFor="let vehicule of vehiculesPaginated;">
+      <div class="service-description">
+        <h2>{{ vehicule?.immatriculation }}</h2>
+        <h3>{{ vehicule?.annee }}</h3>
+        <p>{{ vehicule?.id_marque?.nom_marque }}</p>
+        <p>{{ vehicule?.id_modele?.nom_modele }}</p>
+      </div>
+      <div class="btn-delete-update">
+        <button class="submit-btn-delete" (click)="deleteVehicule(vehicule._id)">Supprimer</button>
+        <button class="submit-btn-update" (click)="openUpdatePopup(vehicule)">Update</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="vehicule-list">
     <div class="service" *ngFor="let vehicule of vehicules;">
       <div class="service-description">
-        <h2>{{ vehicule.nom_vehiculee }}</h2>
-        <p>{{ vehicule.marque.nom_marque }}</p>
-      </div>
-      <button class="submit-btn-delete" (click)="deleteVehicule(vehicule._id)">Supprimer</button>
-      <button type="button" class="submit-btn-update" (click)="openUpdatePopup(vehicule)">Update</button>
-    </div>
-
-    <div class="service">
-      <div class="service-description">
-        <h2>Immatriculation</h2>
-        <p>Annee</p>
-        <p>Couleur</p>
+        <h2>{{ vehicule?.immatriculation }}</h2>
+        <h3>{{ vehicule?.annee }}</h3>
+        <p>{{ vehicule?.id_marque?.nom_marque }}</p>
+        <p>{{ vehicule?.id_modele?.nom_modele }}</p>
       </div>
       <div class="btn-delete-update">
-        <button class="submit-btn-delete">Supprimer</button>
-        <button type="button" class="submit-btn-update" >Update</button>
+        <button class="submit-btn-delete" (click)="deleteVehicule(vehicule._id)">Supprimer</button>
+        <button class="submit-btn-update" (click)="openUpdatePopup(vehicule)">Update</button>
       </div>
-    </div>
-
-    <div class="service">
-      <div class="service-description">
-        <h2>Immatriculation</h2>
-        <p>Annee</p>
-        <p>Couleur</p>
       </div>
-      <div class="btn-delete-update">
-        <button class="submit-btn-delete">Supprimer</button>
-        <button type="button" class="submit-btn-update" >Update</button>
-      </div>
-    </div>
 
-    <div class="service">
-      <div class="service-description">
-        <h2>Immatriculation</h2>
-        <p>Annee</p>
-        <p>Couleur</p>
-      </div>
-      <div class="btn-delete-update">
-        <button class="submit-btn-delete">Supprimer</button>
-        <button type="button" class="submit-btn-update" >Update</button>
-      </div>
-    </div>
-
-    <div class="service">
-      <div class="service-description">
-        <h2>Immatriculation</h2>
-        <p>Annee</p>
-        <p>Couleur</p>
-      </div>
-      <div class="btn-delete-update">
-        <button class="submit-btn-delete">Supprimer</button>
-        <button type="button" class="submit-btn-update" >Update</button>
-      </div>
-    </div>
-
-    <div class="service">
-      <div class="service-description">
-        <h2>Immatriculation</h2>
-        <p>Annee</p>
-        <p>Couleur</p>
-      </div>
-      <div class="btn-delete-update">
-        <button class="submit-btn-delete">Supprimer</button>
-        <button type="button" class="submit-btn-update" >Update</button>
-      </div>
-    </div>
-
-
-
-
-
-
-
-  </div>
+  </div> -->
 </div>
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage >= totalPages">Next</button>
+</div>
+
+

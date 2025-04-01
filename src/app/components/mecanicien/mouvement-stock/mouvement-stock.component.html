@@ -1,0 +1,32 @@
+<div class="container">
+    <h2>Gestion des Mouvements de Stock</h2>
+  
+    <div class="form-group">
+      <label>Pièce :</label>
+      <select [(ngModel)]="selectedPiece" class="form-control">
+        <option *ngFor="let piece of pieces" [value]="piece._id">
+          {{ piece.nom_piece }}
+        </option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+        <label>Type de Mouvement :</label>
+        <select [(ngModel)]="selectedTypeMouvement" class="form-control">
+          <option *ngFor="let type of typesMouvement" [value]="type._id">
+            {{ type.nom_type }}
+          </option>
+        </select>
+    </div>
+  
+    <div class="form-group">
+      <label>Quantité :</label>
+      <input type="number" [(ngModel)]="quantite" class="form-control" min="1">
+    </div>
+  
+    <button (click)="ajouterMouvement()"  class="submit-btn">Ajouter Mouvement</button>
+  
+
+    <p *ngIf="message" class="alert alert-info">{{ message }}</p>
+  </div>
+  

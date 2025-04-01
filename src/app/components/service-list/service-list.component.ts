@@ -10,33 +10,15 @@ import { SousServiceService } from '../../services/sous-service.service';
   templateUrl: './service-list.component.html',
   styleUrl: './service-list.component.css'
 })
-// export class ServiceListComponent {
 
-//   services: any[] = [];
-
-//   ngOnInit(): void {
-//     this.loadServiceList();
-//     }
-
-//   trackByService(index: number, service: any): string {
-//     return service._id;
-//   }
-
-
-//     constructor(private serviceListService: ServiceListService) {}
-
-//   loadServiceList(): void {
-//     this.serviceListService.getData().subscribe(data => this.services =
-//     data);
-
-//   }
-
-// }
 
 export class ServiceListComponent {
   services: any[] = [];
   sous_services: any[] = [];
   isModalOpen: boolean = false;
+  currentPage: number = 1;  // Page actuelle
+  totalPages: number = 1;   // Nombre total de pages
+  limit: number = 10;       // Nombre d'éléments par page
 
   constructor(private serviceListService: ServiceListService, private sousServiceService: SousServiceService) {}
 
@@ -49,7 +31,11 @@ export class ServiceListComponent {
   }
 
   loadServiceList(): void {
-    this.serviceListService.getData().subscribe(data => this.services = data);
+    // Appeler le service avec les paramètres de pagination
+    this.serviceListService.getData(this.currentPage, this.limit).subscribe(data => {
+      this.services = data.services;
+      this.totalPages = data.totalPages; // Mettre à jour le nombre total de pages
+    });
   }
 
   // Ouvrir le popup et charger les sous-services
@@ -65,5 +51,13 @@ export class ServiceListComponent {
   closeModal(): void {
     this.isModalOpen = false;
     this.sous_services = []; // Nettoyer les données
+  }
+
+   // Changer de page
+   changePage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadServiceList();  // Recharger la liste des services
+    }
   }
 }

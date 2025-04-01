@@ -22,4 +22,10 @@ export class ConnexionClientService {
     return this.http.post<any>(this.apiUrl, client, httpOptions);
   }
 
+  logout(): void {
+    localStorage.removeItem('token'); // Supprimer le token
+    console.log('Utilisateur déconnecté');
+  }
+
+
 }

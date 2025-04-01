@@ -1,0 +1,291 @@
+/* Conteneur principal */
+.facture-container {
+    width: 90%;
+    margin: 70px auto;
+    max-width: 1200px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    text-align: center;
+  }
+  
+  /* Titre */
+  .facture-container h2 {
+    color: #333;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* Barre de recherche */
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    margin: 0 auto 20px;
+  }
+  .search-input {
+    width: 60%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+  .search-bar input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s;
+  }
+  
+  .search-bar input:focus {
+    border-color: #2da39c;
+    box-shadow: 0 0 5px rgba(45, 163, 156, 0.5);
+  }
+  
+  /* Bouton de recherche */
+  .search-bar button {
+    background-color: #2da39c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+  }
+  
+  .search-bar button:hover {
+    background-color: #218f88;
+  }
+  
+  /* Tableau */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  th {
+    background-color: #2da39c;
+    color: white;
+  }
+  
+  td {
+    background-color: #f9f9f9;
+  }
+  
+  /* Message si aucune facture */
+  p {
+    color: #888;
+    font-size: 18px;
+    font-style: italic;
+    margin-top: 20px;
+  }
+  
+  /* Pagination */
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    background-color: #2da39c;
+    color: white;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  /* Bouton de recherche */
+.submit-btn {
+    background-color: #2da39c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: bold;
+  }
+  
+  .submit-btn:hover {
+    background-color: #218f88;
+  }
+  
+
+  /* Style du popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-height: 80%;
+    overflow-y: auto;
+    text-align: left;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+
+  /* Styles pour les popups paiement */
+.popup2 {
+    display: none;  /* Le popup est masqué par défaut */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);  /* Ombre autour du popup */
+    z-index: 1000;  /* Assurez-vous que le popup soit au-dessus de tout */
+    transition: opacity 0.3s ease-in-out;  /* Transition pour l'apparition/disparition */
+    opacity: 0;  /* Initialement invisible */
+}
+
+/* Styles pour le contenu du popup */
+.popup2 .popup-content2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  /* Ombre légère pour le popup */
+    animation: popupAnimation 0.4s ease-out;  /* Animation d'apparition */
+}
+
+/* Animation d'apparition */
+@keyframes popupAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Affiche le popup lorsque showPopupPaiement est true */
+.popup2.show {
+    display: block;  /* Ce qui permet d'afficher le popup quand la classe "show" est ajoutée */
+    opacity: 1;  /* Rendre le popup visible */
+}
+
+/* Style pour le bouton de fermeture */
+.close2 {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Changer la couleur du bouton de fermeture au survol */
+.close2:hover {
+    color: #ff4d4d;  /* Rouge vif au survol */
+}
+
+/* Styles pour le formulaire */
+.popup2 form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Style pour les labels du formulaire */
+.popup2 label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Styles pour les champs de formulaire (input) */
+.popup2 input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Styles pour le bouton de paiement */
+.popup2 button {
+    background-color: #4CAF50;  /* Vert pour le bouton */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: center;  /* Centrer le bouton */
+}
+
+/* Changer la couleur du bouton au survol */
+.popup2 button:hover {
+    background-color: #45a049;  /* Vert foncé au survol */
+}
+
+/* Styles pour le fond sombre du popup */
+.popup2.show {
+    opacity: 1;  /* S'assurer que le popup est complètement visible */
+}

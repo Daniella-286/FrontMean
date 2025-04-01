@@ -22,25 +22,22 @@ export class ServiceListService {
     return new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
-  // private getHeaders(): HttpHeaders {
-  //   let token = '';
-  
-  //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
-  //   if (typeof window !== 'undefined') {
-  //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
-  //   }
-  
-  //   return new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
-  //   });
-  // }
-  
-
-  getData(): Observable<any> {
-    //const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get(this.apiUrl, { headers: this.getHeaders() });
+  getData(page: number = 1, limit: number = 10): Observable<any> {
+    // Ajouter page et limit aux paramètres de la requête
+    return this.http.get(this.apiUrl, {
+      headers: this.getHeaders(),
+      params: { page: page.toString(), limit: limit.toString() }
+    });
   }
+
+  getListesService(): Observable<any> {
+    // Ajouter page et limit aux paramètres de la requête
+    return this.http.get(`${this.apiUrl}/listes`, {
+      headers: this.getHeaders(),
+
+    });
+  }
+
 
   addService(serviceData: FormData): Observable<any> {
     const headers = new HttpHeaders();

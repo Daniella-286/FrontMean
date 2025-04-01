@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 })
 export class ListClientService {
    private apiUrl = `https://backmean.onrender.com/api/clients`;
-  //private apiUrl = `http://192.168.0.103:5000/api/clients`;
 
   constructor(private http: HttpClient) { }
 
@@ -23,24 +22,26 @@ export class ListClientService {
     return new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
+  getData(): Observable<any> {
+    return this.http.get(this.apiUrl, { headers: this.getHeaders()});
+  }
+
   // private getHeaders(): HttpHeaders {
   //   let token = '';
-  
+
   //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
   //   if (typeof window !== 'undefined') {
   //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
   //   }
-  
+
   //   return new HttpHeaders({
   //     'Content-Type': 'application/json',
   //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
   //   });
   // }
-  
 
-  getData(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this.getHeaders()});
-  }
+
+
 
   // gets(client: any , headers?: HttpHeaders): Observable<any> {
   //   console.log("client envoyé :", client); // Ajoute ceci pour voir si l'article est bien envoyé

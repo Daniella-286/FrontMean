@@ -17,6 +17,11 @@ export class ListDemandeAttenteClientComponent {
   demandeAttenteSearch: any[] = [];
   demandes: any[] = [];
 
+
+  currentPage: number = 1; // Page courante
+  pageSize: number = 5; // Nombre d'éléments par page
+  totalItems: number = 0; // Nombre total d'éléments
+
   constructor(private demandeDevisService: DemandeDevisService) {}
 
   ngOnInit(): void {
@@ -30,6 +35,8 @@ export class ListDemandeAttenteClientComponent {
           ...demande,
           sous_services: Array.isArray(demande.sous_services) ? demande.sous_services : []
         }));
+        this.totalItems = this.demandes.length; // Met à jour le nombre total d'éléments
+        this.paginate(); // Applique la pagination
       } else {
         console.error('Les données renvoyées ne sont pas un tableau:', data);
         this.demandes = [];  // Réinitialisez les demandes en cas de données incorrectes
@@ -67,6 +74,18 @@ export class ListDemandeAttenteClientComponent {
         console.error("❌ Erreur lors de la récupération des données :", error);
       }
     );
+  }
+
+  paginate(): void {
+    // Calcul des éléments à afficher sur la page courante
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.demandeAttenteSearch = this.demandes.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.paginate();
   }
 }
 

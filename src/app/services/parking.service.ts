@@ -29,18 +29,18 @@ export class ParkingService {
 
   // private getHeaders(): HttpHeaders {
   //   let token = '';
-  
+
   //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
   //   if (typeof window !== 'undefined') {
   //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
   //   }
-  
+
   //   return new HttpHeaders({
   //     'Content-Type': 'application/json',
   //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
   //   });
   // }
-  
+
 
     addParking(parking: any , headers?: HttpHeaders): Observable<any> {
       console.log("parking envoyé :", parking); // Ajoute ceci pour voir si l'article est bien envoyé

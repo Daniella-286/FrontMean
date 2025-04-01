@@ -1,0 +1,66 @@
+<div class="background-overlay"  *ngIf="showPopup" (click)="closePopup()"></div>
+
+
+<div class="titre">
+  <h1>Liste des Mecaniciens à  valider </h1>
+  <!-- <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getReservationSearch()">Search</button>
+  </div> -->
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>nom</th>
+        <th>prénom</th>
+        <th>date de naissance</th>
+        <th>Contact</th>
+        <th>Adresse</th>
+        <th>e-mail</th>
+        <th>id mécanicien </th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Itérer sur les réservations -->
+      <tr *ngFor="let mecanicien of mecaniciens">
+
+        <td>{{mecanicien.nom}}</td>  <!-- Afficher le véhicule -->
+        <td>{{mecanicien.prenom}}</td>  <!-- Afficher la date de début au format souhaité -->
+        <td>{{mecanicien.date_naissance | date:'dd/MM/yyyy'}}</td>  <!-- Afficher la date de fin au format souhaité -->
+        <td>{{mecanicien.contact}}</td>
+        <td>{{mecanicien.adresse}}</td>
+        <td>{{mecanicien.email}}</td>
+        <td>{{mecanicien._id}}</td>
+        <td>
+          <button type="button" class="submit-btn" (click)="openPopup(mecanicien)">Valider</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="popup" *ngIf="showPopup">
+  <div class="popup-content">
+    <span class="close-btn" (click)="closePopup()">&times;</span>
+    <h2>Affecter un service</h2>
+    <!-- <div *ngIf="message" class="alert" [ngClass]="{'alert-success': success, 'alert-danger': !success}">
+      {{ message }}
+    </div> -->
+    <form (ngSubmit)="ValidationMecanicieByManager()" #UpdateRendezVousClientForm="ngForm">
+      <div class="input-group">
+        <label for="service">Service :</label>
+        <select name="service" [(ngModel)]="updateForm.id_service" required>
+          <option value="default" selected>-- Sélectionnez une option --</option>
+          <option *ngFor="let service of services" [value]="service._id">{{ service.nom_service }}</option>
+        </select>
+      </div>
+      <button type="submit" class="submit-btn" [disabled]="UpdateRendezVousClientForm.invalid">Affecter un service</button>
+    </form>
+
+  </div>
+</div>

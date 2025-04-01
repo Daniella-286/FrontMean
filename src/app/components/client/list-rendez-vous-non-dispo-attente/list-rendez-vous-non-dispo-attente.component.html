@@ -1,0 +1,55 @@
+<div class="background-overlay"></div>
+
+<div class="titre">
+  <h1>Liste des rendez-vous non dispo  </h1>
+  <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getRendezVousNonDispoAttenteSearch()">Search</button>
+  </div>
+</div>
+
+<!-- <div *ngIf="message" class="error-message">
+  {{ message }}
+</div> -->
+<!-- <div *ngIf="message" class="alert" [ngClass]="{'alert-success': success, 'alert-danger': !success}">
+  {{ message }}
+</div> -->
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Date prise de rendez-vous</th>
+        <!-- <th>Client</th> -->
+        <th>Date de rendez-vous</th>
+        <th>Date limite confirmation</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Afficher les rendez-vous, soit les résultats de la recherche, soit les résultats par défaut -->
+      <tr *ngFor="let rdv of (rendezVousSearch.length > 0 ? rendezVousSearch : rendez_vous)">
+
+        <td>{{ rdv.date_prise_rendez_vous | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <!-- <td>{{ rdv.id_client?.nom }}</td> -->
+        <td>{{ rdv.date_rendez_vous | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ rdv.date_limite_confirmation | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ rdv.statut }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+  <!-- Afficher un message si aucun rendez-vous n'est trouvé -->
+  <p *ngIf="rendezVousSearch.length === 0 && rendez_vous.length === 0">Aucun rendez-vous trouvé.</p>
+</div>
+
+
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} sur {{ totalItems / pageSize  }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * pageSize >= totalItems">Next</button>
+</div>

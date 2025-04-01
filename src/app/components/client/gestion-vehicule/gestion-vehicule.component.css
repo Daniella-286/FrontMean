@@ -11,32 +11,9 @@
   z-index: 10;
 }
 
-.popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-
 
 /* === FORMULAIRE POPUP === */
-.popup-content {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 420px;
-  max-width: 90%;
-}
 
-h2 {
-  font-size: 22px;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
 
 /* === CHAMPS DE SAISIE === */
 .input-group {
@@ -56,10 +33,10 @@ h2 {
 .input-group input[type="file"],
 .input-group input[type="number"],
 .input-group select{
-  width: 100%;
+  width: 90%;
   padding: 10px;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 14px;
   transition: border 0.3s ease-in-out;
 }
@@ -100,7 +77,7 @@ h2 {
 /* === BOUTON DE VALIDATION === */
 .submit-btn {
   width: 100%;
-  background: #47a75d;
+  background: #0d726ac9;
   color: white;
   border: none;
   padding: 12px;
@@ -187,9 +164,19 @@ h2 {
 
 
 .popup {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: block !important;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 420px;
+  max-width: 90%;
+  z-index: 9999 !important;
 }
 
 .popup.ng-animating {

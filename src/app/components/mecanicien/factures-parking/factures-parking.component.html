@@ -1,0 +1,76 @@
+<p>factures-parking works!</p>
+<div class="facture-container">
+    <h2>Liste des Factures de Parking</h2>
+  
+    <input 
+      type="text" 
+      [(ngModel)]="numeroRecherche" 
+      (keyup.enter)="rechercherFacture()" 
+      placeholder="Rechercher par numéro de facture..." 
+      class="search-input"
+    />
+    <button (click)="rechercherFacture()" class="btn-rechercher">Rechercher</button>
+  
+    <table *ngIf="factures.length > 0">
+      <thead>
+        <tr>
+          <th>Numéro Facture</th>
+          <th>Total</th>
+          <th>Date</th>
+          <th>Actions</th>
+          <th>Paiement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let facture of factures">
+          <td>{{ facture.numero_facture }}</td>
+          <td>{{ facture.total }} Ariary</td>
+          <td>{{ facture.date_facture | date:'dd/MM/yyyy'  }}</td>
+          <td>
+            <button type="button" class="submit-btn"  (click)="voirDetails(facture._id)">Voir</button>
+          </td>
+          <td>
+            <button type="button" class="submit-btn" (click)="ouvrirPopupPaiement(facture)">Effectuer Paiement</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+  <!-- Message si aucune facture trouvée -->
+  <p *ngIf="factures.length === 0">Aucune facture disponible.</p>
+
+   <!-- Pagination -->
+   <div class="pagination">
+    <button (click)="changePage(false)" [disabled]="page === 1">Précédent</button>
+    <span>Page {{ page }} / {{ totalPages }}</span>
+    <button (click)="changePage(true)" [disabled]="page === totalPages">Suivant</button>
+  </div>
+</div>
+
+  <!-- Popup des détails -->
+  <div *ngIf="showPopup" class="popup">
+    <div class="popup-content">
+      <span class="close" (click)="fermerPopup()">&times;</span>
+      <h3>Détails de la Facture</h3>
+      <p><strong>Numéro :</strong> {{ factureSelectionnee.numero_facture }}</p>
+      <p><strong>Durée :</strong> {{ factureSelectionnee.duree_parking }} heures</p>
+      <p><strong>Tarif/Heure :</strong> {{ factureSelectionnee.tarif_heure }} FCFA</p>
+      <p><strong>Total :</strong> {{ factureSelectionnee.total }} FCFA</p>
+      <p><strong>Date :</strong> {{ factureSelectionnee.date_facture | date:'dd/MM/yyyy HH:mm' : 'UTC'}}</p>
+    </div>
+  </div>
+
+
+
+  <!-- Popup de paiement -->
+    <div class="popup2" [class.show]="showPopupPaiement">
+        <div class="popup-content2">
+        <span class="close2" (click)="fermerPopupPaiement()">&times;</span>
+        <h3>Effectuer le Paiement</h3>
+        <form (submit)="effectuerPaiement()">
+            <label for="montant">Montant total payé :</label>
+            <input type="number" id="montant" [(ngModel)]="montantPaiement" name="montant" required>
+            <button type="submit" class="submit-btn" >Payer</button>
+        </form>
+        </div>
+    </div>

@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CompetenceService } from '../../services/competence.service';
 import { InscriptionMecanicienService } from '../../services/inscription-mecanicien.service';
-import { ServiceListService } from '../../services/service.service';
 
 @Component({
   selector: 'app-inscription-mecanicien',
@@ -13,32 +12,33 @@ import { ServiceListService } from '../../services/service.service';
   styleUrl: './inscription-mecanicien.component.css'
 })
 export class InscriptionMecanicienComponent {
-  elementForm = { nom: '', prenom: '' , id_competence:"" , id_service:"" , date_naissance: "",
-    genre:"",contact:"",adresse:"",email:"",mdp:""
+  elementForm = { nom: '', prenom: '' , id_competence:"", date_naissance: "",
+    genre:"",contact:"",adresse:"",email:"",mdp:"", confirmMdp:""
    };
+
+   //nom, prenom, id_competence, date_naissance, genre, contact, adresse, email, mdp, confirmMdp
 
    mecaniciens: any[] = [];
    competences: any[] = [];
    services: any[] = [];
 
      constructor(private inscriptionClientService: InscriptionMecanicienService , private competenceService: CompetenceService ,
-       private serviceMecanicienService: ServiceListService) {}
+     ) {}
 
       ngOnInit(): void {
       this.loadCompetence();
-     this.loadService();
       }
 
      registerMecanicien(): void {
       console.log("📤 Données envoyées retooo:", this.elementForm); // 🔍 Vérifier si cette fonction est bien appelée
 
       // Vérifier si tous les champs requis sont remplis
-      if (!this.elementForm.nom || !this.elementForm.prenom || !this.elementForm.date_naissance ||
-          !this.elementForm.genre || !this.elementForm.contact || !this.elementForm.adresse ||
-          !this.elementForm.email || !this.elementForm.mdp) {
-        console.warn("⚠️ Formulaire incomplet :", this.elementForm);
-        return;
-      }
+      // if (!this.elementForm.nom || !this.elementForm.prenom || !this.elementForm.date_naissance ||
+      //     !this.elementForm.genre || !this.elementForm.contact || !this.elementForm.adresse ||
+      //     !this.elementForm.email || !this.elementForm.mdp) {
+      //   console.warn("⚠️ Formulaire incomplet :", this.elementForm);
+      //   return;
+      // }
 
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -48,8 +48,8 @@ export class InscriptionMecanicienComponent {
           console.log("📤 Données envoyées au serveur :", JSON.stringify(this.elementForm));
 
           // this.loadInscriptionClient(); // Recharge la liste après ajout
-          this.elementForm = { nom: '', prenom: '' , id_competence:"" , id_service:"" , date_naissance: "",
-            genre:"",contact:"",adresse:"",email:"",mdp:"" }; // Réinitialise le formulaire
+          this.elementForm = { nom: '', prenom: '' , id_competence:"" , date_naissance: "",
+            genre:"",contact:"",adresse:"",email:"",mdp:"" , confirmMdp:""  }; // Réinitialise le formulaire
         },
         error => {
           console.error("❌ Erreur lors de l'ajout :", error); // 🔍 Afficher les erreurs possibles
@@ -63,11 +63,6 @@ export class InscriptionMecanicienComponent {
         //this.loadCompetence();  // Appeler loadArticles après que les catégories aient été chargées
       });
     }
-    loadService(): void {
-      this.serviceMecanicienService.getData().subscribe(data => {
-        this.services = data;
-       // this.loadService();  // Appeler loadArticles après que les catégories aient été chargées
-      });
-    }
+
 
 }

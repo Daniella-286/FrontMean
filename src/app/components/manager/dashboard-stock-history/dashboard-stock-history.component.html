@@ -1,0 +1,30 @@
+<div class="stock-container">
+    <h2>Historique des Mouvements de Stock</h2>
+  
+    <table>
+      <thead>
+        <tr>
+          <th>Pièce</th>
+          <th>Type de Mouvement</th>
+          <th>Quantité</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of stockHistory">
+          <td>{{ item.id_piece.nom_piece }}</td>
+          <td>{{ item.id_type_mouvement.nom_type }}</td>
+          <td>{{ item.quantite }}</td>
+          <td>{{ item.date_mouvement | date:'dd/MM/yyyy HH:mm' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination -->
+    <div class="pagination">
+      <button (click)="goToPage(page - 1)" [disabled]="page === 1">Précédent</button>
+      <span>Page {{ page }} / {{ totalPages }}</span>
+      <button (click)="goToPage(page + 1)" [disabled]="page === totalPages">Suivant</button>
+    </div>
+  </div>
+  

@@ -11,9 +11,10 @@ export class DemandeDevisService {
 
   constructor(private http: HttpClient) { }
 
-  ngOnInit(): void {
-    this.loadDemandeEnvoye();
-    }
+  // ngOnInit(): void {
+  //   this.loadDemandeEnvoye();
+  //   }
+
 
     private getHeaders(): HttpHeaders {
       if (typeof window !== 'undefined') {
@@ -29,18 +30,18 @@ export class DemandeDevisService {
 
     // private getHeaders(): HttpHeaders {
     //   let token = '';
-    
+
     //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
     //   if (typeof window !== 'undefined') {
     //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
     //   }
-    
+
     //   return new HttpHeaders({
     //     'Content-Type': 'application/json',
     //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
     //   });
     // }
-    
+
 
   AddDemandeDevis(demande: FormData): Observable<any> {
     const headers = this.getHeaders(); // Appelle getHeaders() pour récupérer les en-têtes avec le token

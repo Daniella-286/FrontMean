@@ -27,9 +27,15 @@
         <td>{{ reservation.date_fin | date:'dd/MM/yyyy HH:mm:ss' }}</td>
         <td>{{ reservation.statut }}</td>
         <button type="button" class="submit-btn" (click)="confirmReservation(reservation._id)">Confirmer</button>
-        
+
         <button type="button" class="submit-btn" (click)="cancelReservation(reservation._id)">Annuler</button>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+  <span>Page {{ currentPage }} sur {{ totalItems / pageSize  }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage * pageSize >= totalItems">Next</button>
 </div>
