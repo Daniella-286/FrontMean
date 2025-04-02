@@ -1,0 +1,42 @@
+<div class="titre">
+  <h1>Liste des interventions terminées</h1>
+  <div class="input-group">
+    <label for="date">Recherche</label>
+    <input type="date" name="date" id="date" [(ngModel)]="elementSearchForm.date" required>
+    <button type="button" class="submit-btn" (click)="getInterventionTerminerSearch()">Rechercher</button>
+  </div>
+</div>
+
+<!-- Afficher un message d'erreur s'il n'y a pas de résultats pour la date recherchée -->
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Véhicule</th>
+        <th>Client</th>
+        <th>Date Intervention</th>
+        <th>Durée Réparation</th>
+        <th>Avancement</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let intervention of reservationSearch"> <!-- Utiliser reservationSearch ici -->
+        <td>{{ intervention.vehicule.immatriculation }} - {{ intervention.vehicule.marque }} {{ intervention.vehicule.modele }}</td>
+        <td>{{ intervention.client.prenom }} {{ intervention.client.nom }} - {{ intervention.client.contact }}</td>
+        <td>{{ intervention.date_intervention | date: 'dd/MM/yyyy HH:mm:ss' }}</td>
+        <td>{{ intervention.duree_reparation }} heures</td>
+        <td>{{ intervention.avancement }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+    <span>Page {{ currentPage }} sur {{ totalPages }}</span> <!-- Utilisation de totalPages ici -->
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Suivant</button>
+  </div>
+</div>

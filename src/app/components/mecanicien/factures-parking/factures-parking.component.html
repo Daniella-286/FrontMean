@@ -1,16 +1,16 @@
-<p>factures-parking works!</p>
+
 <div class="facture-container">
     <h2>Liste des Factures de Parking</h2>
-  
-    <input 
-      type="text" 
-      [(ngModel)]="numeroRecherche" 
-      (keyup.enter)="rechercherFacture()" 
-      placeholder="Rechercher par numéro de facture..." 
+
+    <input
+      type="text"
+      [(ngModel)]="numeroRecherche"
+      (keyup.enter)="rechercherFacture()"
+      placeholder="Rechercher par numéro de facture..."
       class="search-input"
     />
     <button (click)="rechercherFacture()" class="btn-rechercher">Rechercher</button>
-  
+
     <table *ngIf="factures.length > 0">
       <thead>
         <tr>
@@ -35,7 +35,7 @@
         </tr>
       </tbody>
     </table>
-  
+
   <!-- Message si aucune facture trouvée -->
   <p *ngIf="factures.length === 0">Aucune facture disponible.</p>
 

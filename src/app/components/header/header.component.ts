@@ -1,25 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // Importer Router
+import { Router } from '@angular/router';
 import { ConnexionClientService } from '../../services/connexion.service';
-
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, FormsModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  imports: [CommonModule, FormsModule],
+  styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  isAuthenticated: boolean = false;
 
-  constructor(private connexionClient: ConnexionClientService ,  private router: Router){
+  constructor(private connexionClient: ConnexionClientService, private router: Router) {}
 
+  ngOnInit(): void {
+    this.isAuthenticated = this.connexionClient.isLoggedIn();
   }
 
   logout(): void {
-    this.connexionClient.logout(); // Supprimer le token du stockage local
-   this.router.navigate(['/connexion']); // Rediriger vers la page de connexion
+    this.connexionClient.logout();
+    this.isAuthenticated = false; // Mettre à jour l'état
   }
-
 }

@@ -128,18 +128,37 @@ ul li {
 
 
 .pagination {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
   margin-top: 20px;
 }
 
 .pagination button {
   padding: 10px 20px;
-  margin: 0 10px;
   font-size: 16px;
+  background-color: #2da39c;
+  color: white;
+  border: 1px solid #2da39c;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #2da39c;
+  transform: scale(1.05);
+}
+
+.pagination button:disabled {
+  background-color: #d6d6d6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .pagination span {
   font-size: 16px;
-  margin: 0 10px;
+  color: #333;
+  font-weight: bold;
 }

@@ -13,8 +13,16 @@ export class GestionRendezVousComponent  {
   rendezVousSearch: any[] = [];  // Pour stocker les résultats de recherche
   rendez_vous: any[] = [];        // Pour stocker les résultats par défaut
   elementSearchForm: any = {};    // Formulaire de recherche
-  message: string = ""; // Stocke le message du backend
-//implements OnInit
+
+  errorMessage : string = ''; // Message du backend
+
+  currentPage: number = 1; // Page courante
+  pageSize: number = 5; // Nombre d'éléments par page
+  totalItems: number = 0; // Nombre total d'éléments
+  totalPages: number = 0; // Nombre total de pages
+
+
+  //implements OnInit
   constructor(private rendezVousService: RendezVousService) {}
 
   ngOnInit() {
@@ -26,11 +34,28 @@ export class GestionRendezVousComponent  {
     this.rendezVousService.getRendezVousDefault().subscribe((data: any) => {
       if (data && Array.isArray(data.rendezVous)) {
         this.rendez_vous = data.rendezVous;
+        this.totalItems = this.rendez_vous.length; // Met à jour le nombre total d'éléments
+        this.totalPages = Math.ceil(this.totalItems / this.pageSize); // Calcul du nombre total de pages
+        this.paginate(); // Applique la pagination
       }
     });
   }
+  paginate(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.rendez_vous = this.rendez_vous.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    if (page < 1 || page > this.totalPages) return; // Assurer que la page est dans les limites
+    this.currentPage = page;
+    this.paginate();
+  }
+
 
   getAllRendezVousSearch(): void {
+    console.log("tonga etoooo");
+
     if (!this.elementSearchForm.date_debut || !this.elementSearchForm.date_fin) {
       alert("Veuillez entrer des dates valides !");
       return;
@@ -44,25 +69,34 @@ export class GestionRendezVousComponent  {
 
     this.rendezVousService.getAllRendezVousSearch(dateDebut, dateFin)
       .subscribe((data: any) => {
-        if (Array.isArray(data.rendezVous)) {
+        if (Array.isArray(data.rendezVous) && data.rendezVous.length > 0) {
           this.rendezVousSearch = data.rendezVous;
+          this.errorMessage = '';  // Réinitialiser l'erreur si des résultats sont trouvés
+          console.log("reto ilay notadiavina ", this.rendezVousSearch);
         } else {
           this.rendezVousSearch = [];
+          this.errorMessage = 'Aucune demande en attente trouvée pour cette période.';
+          console.log("tsis ilay izy ");
         }
+      }, (error) => {
+        this.rendezVousSearch = [];
+        this.errorMessage = 'Une erreur est survenue lors de la recherche des rendez-vous.';
+        console.log("Erreur:", error);
       });
   }
+
 
   ValidationRendezVous(id_rdv: string): void {
     console.log('ity ny id rdv ', id_rdv);
     this.rendezVousService.confirmRendezVousManager(id_rdv).subscribe(
       (response: any) => {
-        this.message = response.message;  // Message de succès
+        this.errorMessage = response.message;  // Message de succès
         this.loadDefaultRendezVous();  // Rafraîchir la liste des rendez-vous
         window.location.reload();
       },
       (error) => {
-        this.message = error.message || "Erreur inconnue";  // Message d'erreur du backend
-        console.error("Erreur:", this.message);  // Afficher l'erreur dans la console pour debug
+        this.errorMessage = error.message || "Erreur inconnue";  // Message d'erreur du backend
+        console.error("Erreur:", this.errorMessage);  // Afficher l'erreur dans la console pour debug
       }
     );
   }
@@ -71,13 +105,13 @@ export class GestionRendezVousComponent  {
     console.log('ity ny id rdv ', id_rdv);
     this.rendezVousService.NonDispoRendezVousManager(id_rdv).subscribe(
       (response: any) => {
-        this.message = response.message;  // Message de succès
+        this.errorMessage = response.message;  // Message de succès
         this.loadDefaultRendezVous();  // Rafraîchir la liste des rendez-vous
         window.location.reload();
       },
       (error) => {
-        this.message = error.message || "Erreur inconnue";  // Message d'erreur du backend
-        console.error("Erreur:", this.message);  // Afficher l'erreur dans la console pour debug
+        this.errorMessage = error.message || "Erreur inconnue";  // Message d'erreur du backend
+        console.error("Erreur:", this.errorMessage);  // Afficher l'erreur dans la console pour debug
       }
     );
   }

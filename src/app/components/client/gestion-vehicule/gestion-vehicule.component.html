@@ -68,7 +68,7 @@
   <!-- Liste des vehiculee -->
 
   <div class="vehicule-list">
-    <div class="service" *ngFor="let vehicule of vehiculesPaginated;">
+    <div class="service" *ngFor="let vehicule of vehicules;">
       <div class="service-description">
         <h2>{{ vehicule?.immatriculation }}</h2>
         <h3>{{ vehicule?.annee }}</h3>
@@ -82,21 +82,6 @@
     </div>
   </div>
 
-  <!-- <div class="vehicule-list">
-    <div class="service" *ngFor="let vehicule of vehicules;">
-      <div class="service-description">
-        <h2>{{ vehicule?.immatriculation }}</h2>
-        <h3>{{ vehicule?.annee }}</h3>
-        <p>{{ vehicule?.id_marque?.nom_marque }}</p>
-        <p>{{ vehicule?.id_modele?.nom_modele }}</p>
-      </div>
-      <div class="btn-delete-update">
-        <button class="submit-btn-delete" (click)="deleteVehicule(vehicule._id)">Supprimer</button>
-        <button class="submit-btn-update" (click)="openUpdatePopup(vehicule)">Update</button>
-      </div>
-      </div>
-
-  </div> -->
 </div>
 <div class="pagination">
   <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>

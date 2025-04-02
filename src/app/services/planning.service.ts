@@ -1,6 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class PlanningService {
   private apiUrl = 'https://backmean.onrender.com/api/interventions'; // URL du backend
   private sousservices = 'https://backmean.onrender.com/api/sous-services';
   private piecessousservices = 'https://backmean.onrender.com/api/pieces-services';
-  
+
   constructor(private http: HttpClient) { }
 
   private getHeaders(): HttpHeaders {
@@ -26,12 +26,12 @@ export class PlanningService {
   }
 
   searchPlannings(date: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/mecanicien/plainning?date=${date}`, 
+    return this.http.get(`${this.apiUrl}/mecanicien/plainning?date=${date}`,
       { headers: this.getHeaders() });
   }
 
   getTasksForIntervention(interventionId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/mecanicien/tache/${interventionId}`, 
+    return this.http.get(`${this.apiUrl}/mecanicien/tache/${interventionId}`,
       { headers: this.getHeaders() });
   }
 
@@ -45,12 +45,12 @@ export class PlanningService {
     console.log("URL appelée :", this.sousservices); // ✅ Vérifier l'URL
     return this.http.get(this.sousservices, { headers });
   }
-  
+
   getPiecesBySousService(id_sous_service: string) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.get(`${this.piecessousservices}/pieces-par-sousservice/${id_sous_service}`, { headers });
   }
-  
+
   addPieceToIntervention(data: any) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(`${this.apiUrl}/ajouter-piece-utilise`, data);

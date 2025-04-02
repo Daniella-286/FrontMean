@@ -26,6 +26,9 @@
 <!-- <div *ngIf="message" class="alert" [ngClass]="{'alert-success': success, 'alert-danger': !success}">
   {{ message }}
 </div> -->
+<div *ngIf="errorMessage" class="error-message">
+  {{ errorMessage }}
+</div>
 <div>
   <table>
     <thead>
@@ -39,11 +42,6 @@
       </tr>
     </thead>
     <tbody>
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-
-
       <!-- Afficher les rendez-vous, soit les résultats de la recherche, soit les résultats par défaut -->
         <tr *ngFor="let mecanicien of (mecanicienSearch.length > 0 ? mecanicienSearch : mecaniciens)">
 
@@ -55,6 +53,12 @@
   </table>
   <!-- Afficher un message si aucun rendez-vous n'est trouvé -->
   <p *ngIf="mecanicienSearch.length === 0 && mecaniciens.length === 0">Aucun mecanicien trouvé.</p>
+
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+    <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Suivant</button>
+  </div>
 </div>
 
 

@@ -7,19 +7,14 @@ body {
 }
 
 .error-message {
-  color: #d9534f;
-  font-size: 18px;
+  color: #d32f2f; /* Rouge plus doux */
+  background-color: #ffebee; /* Fond rouge clair */
+  border: 1px solid #d32f2f;
+  padding: 10px;
   font-weight: bold;
-  margin-top: 20px;
-  margin-left: 100px;
   text-align: center;
-  background: #f8d7da;
-  padding: 15px;
   border-radius: 5px;
-  display: inline-block;
-  border-left: 5px solid #c82333;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.3s ease-in-out;
+  margin: 10px 0;
 }
 
 .error-message i {
@@ -58,6 +53,15 @@ body {
 }
 
 .input-group input {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.input-group select {
   padding: 8px 12px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -205,16 +209,6 @@ ul li {
   color: #ff5b5b;
 }
 
-.error-message {
-  color: #e75c5c; /* Texte en blanc */
-  background-color: #e2e2e2; /* Fond rouge vif */
-  padding: 10px 15px; /* Espacement autour du texte */
-  border-radius: 5px; /* Coins arrondis */
-  margin-top: 10px; /* Un peu d'espace au-dessus */
-  font-weight: bold; /* Mettre en gras le texte */
-  text-align: center; /* Centrer le texte */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Ombre légère pour le style */
-}
 
 .error-message a {
   color: #f44336; /* Lien blanc */

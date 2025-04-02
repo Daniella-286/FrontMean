@@ -9,16 +9,19 @@
     <button type="button" class="submit-btn" (click)="getAllRendezVousSearch()">Search</button>
   </div>
 </div>
-<div *ngIf="message" class="error-message">
-  {{ message }}
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
 </div>
-<div>
+
+<div *ngIf="rendez_vous.length > 0 && !errorMessage">
   <table>
     <thead>
       <tr>
         <th>Date de demande</th>
         <th>Client</th>
         <th>Date de rendez-vous</th>
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -38,4 +41,10 @@
   </table>
   <!-- Afficher un message si aucun rendez-vous n'est trouvé -->
   <p *ngIf="rendezVousSearch.length === 0 && rendez_vous.length === 0">Aucun rendez-vous trouvé.</p>
+
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} sur {{ totalPages }}</span> <!-- Affichage du nombre total de pages -->
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
 </div>

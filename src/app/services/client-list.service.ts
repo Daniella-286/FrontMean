@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ListClientService {
    private apiUrl = `https://backmean.onrender.com/api/clients`;
+  //private apiUrl = `http://192.168.0.103:5000/api/clients`;
 
   constructor(private http: HttpClient) { }
 
@@ -22,9 +23,14 @@ export class ListClientService {
     return new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
-  getData(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this.getHeaders()});
+  getData(page: number, limit: number, search: string = ''): Observable<any> {
+    return this.http.get(`${this.apiUrl}?page=${page}&limit=${limit}&search=${search}`, { headers: this.getHeaders() });
   }
+
+  // getData(): Observable<any> {
+  //   return this.http.get(this.apiUrl, { headers: this.getHeaders()});
+  // }
+
 
   // private getHeaders(): HttpHeaders {
   //   let token = '';

@@ -34,7 +34,6 @@ export class ServiceListService {
     // Ajouter page et limit aux paramètres de la requête
     return this.http.get(`${this.apiUrl}/listes`, {
       headers: this.getHeaders(),
-
     });
   }
 

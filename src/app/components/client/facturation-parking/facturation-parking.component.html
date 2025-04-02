@@ -1,0 +1,81 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="piece-container">
+  <div class="piece">
+    <div class="piece">
+      <h2>Liste des factures parking</h2>
+          <!-- Immatriculation -->
+    </div>
+  </div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>numéro de facture</th>
+          <th>Total </th>
+          <th>Durée parking</th>
+          <th>Tarif heure</th>
+          <th>date de facture  </th>
+          <th>durée de réparation</th>
+          <th> debut</th>
+          <th> fin </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Afficher les rendez-vous, soit les résultats de la recherche, soit les résultats par défaut -->
+        <tr *ngFor="let facture of Factures;">
+          <td>{{ facture?.numero_facture }}</td>
+          <td>{{ facture?.total }}</td>
+          <td>{{ facture?.duree_parking }}</td>
+          <td>{{ facture?.tarif_heure }}</td>
+          <td>{{ facture?.date_facture }}</td>
+          <td>{{ facture?.id_reservation?.date_debut | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ facture?.id_reservation?.date_fin | date:'dd/MM/yyyy HH:mm' }}</td>
+
+          <td>
+              <button type="button" (click)="openPopup(facture)" class="submit-btn">details </button>
+          </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+  <span>Page {{ currentPage }} / {{ totalPages }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Suivant</button>
+</div>
+
+<div *ngIf="showPopup" class="popup">
+  <div class="popup-content">
+    <h2>Détails de la Facture</h2>
+
+    <div *ngIf="facture">
+      <table>
+        <thead>
+          <tr>
+            <th>Date Facture</th>
+            <th>Numéro Parking</th>
+            <th>Numéro Facture</th>
+            <th>Durée Parking (heures)</th>
+            <th>Tarif par Heure</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ facture.date_facture | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ facture.numero_parking }}</td>
+            <td>{{ facture.numero_facture }}</td>
+            <td>{{ facture.duree_parking }}</td>
+            <td>{{ facture.tarif_heure | currency }}</td>
+            <td>{{ facture.total | currency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button class="submit-btn" (click)="generatePDF()">Generate Pdf</button>
+
+  </div>
+</div>

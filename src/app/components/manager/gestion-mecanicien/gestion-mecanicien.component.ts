@@ -13,8 +13,15 @@ import { ServiceListService } from '../../../services/service.service';
 export class GestionMecanicienComponent {
       mecaniciens: any[] = [];
       services: any[] = [];
-      message: string = ""; // Stocke le message du backend
-      errorMessage: string = ""
+
+
+      errorMessage: string = "";
+
+      searchQuery: string = ""; // Requête de recherche
+      currentPage: number = 1;
+      totalPages: number = 1;
+      pageSize: number = 10; // Nombre d'éléments par page
+
       showPopup = false; // Pour l'update
       updateForm = { id_service: ''};
       selectedMecanicienId: string | null = null;
@@ -28,24 +35,56 @@ export class GestionMecanicienComponent {
 
       loadMecancienList(): void {
         console.log("Début de loadMecancienList()");
-        this.mecanicienService.getRendezVousMecanicienDefault().subscribe((response: any) => {
+        this.mecanicienService.getMecaniciensNonValides(this.currentPage, this.pageSize, this.searchQuery).subscribe((response: any) => {
           console.log("Réponse API reçue :", response);
 
-          if (response && Array.isArray(response.data)) {
-            this.mecaniciens = response.data; // Correctement assigner les mécaniciens
-            console.log("Liste des mécaniciens :", this.mecaniciens);
+          if (response.success) {
+            if (Array.isArray(response.data) && response.data.length > 0) {
+              this.mecaniciens = response.data;
+              this.totalPages = response.totalPages;
+              this.errorMessage = ""; // Réinitialiser le message d'erreur s'il y a des résultats
+            } else {
+              this.mecaniciens = []; // Vider la liste si aucun résultat trouvé
+              this.errorMessage = response.message || "Aucun mécanicien trouvé."; // Utiliser le message de l'API
+            }
           } else {
-            console.error("Format de réponse inattendu :", response);
+            console.error("Erreur API :", response.message);
+            this.errorMessage = "Une erreur est survenue lors de la récupération des mécaniciens.";
           }
+        }, (error) => {
+          console.error("Erreur API :", error);
+          this.errorMessage = "Impossible de récupérer les mécaniciens. Vérifiez votre connexion.";
         });
       }
 
-      loadService(): void {
-        this.serviceListService.getData().subscribe(data => {
-          this.services = data;
-         // this.loadService();  // Appeler loadArticles après que les catégories aient été chargées
-        });
-      }
+        // Gérer la recherche
+  onSearchChange(): void {
+    this.currentPage = 1; // Réinitialiser la pagination en cas de nouvelle recherche
+    this.loadMecancienList();
+  }
+
+  // Passer à la page suivante
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.loadMecancienList();
+    }
+  }
+
+  // Revenir à la page précédente
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadMecancienList();
+    }
+  }
+
+  loadService(): void {
+    this.serviceListService.getListesService().subscribe(data => {
+      this.services = data;
+     // this.loadService();  // Appeler loadArticles après que les catégories aient été chargées
+    });
+  }
 
       openPopup(mecanicien: any) {
         if (!mecanicien || !mecanicien._id) {
@@ -78,13 +117,13 @@ export class GestionMecanicienComponent {
         this.mecanicienService.validationMecanicieByManager(this.selectedMecanicienId, this.updateForm.id_service)
           .subscribe(
             (response: any) => {
-              this.message = response.message;
+              this.errorMessage = response.message;
               this.loadMecancienList();
               this.showPopup = false;
             },
             (error) => {
-              this.message = error.message || "Erreur inconnue";
-              console.error("Erreur:", this.message);
+              this.errorMessage = error.message || "Erreur inconnue";
+              console.error("Erreur:", this.errorMessage);
             }
           );
       }
