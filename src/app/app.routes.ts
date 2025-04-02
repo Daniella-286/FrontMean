@@ -145,6 +145,6 @@ export const routes: Routes = [
  { path: 'factures-du-jour', component: FacturesComponent },
  { path: 'factures-parking-du-jour', component: FactureParkingComponent },
  { path: 'mouvement-stock', component: MouvementStockComponent },
- { path: '', redirectTo: 'services', pathMatch: 'full' } // Redirection
-
+ { path: '', redirectTo: '/connexion', pathMatch: 'full' }, // Assure-toi d'avoir cette ligne
+ { path: '**', redirectTo: '/connexion' } // Capture toutes les routes non définies
 ];
