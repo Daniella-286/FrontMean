@@ -1,8 +1,9 @@
 [build]
+  base = "/"
   publish = "dist/frontend/browser"
   command = "ng build --configuration production"
 
 [[redirects]]
   from = "/"
   to = "/connexion"
-  status = 200
+  status = 301
