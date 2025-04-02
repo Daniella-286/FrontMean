@@ -3,13 +3,12 @@
   command = "ng build --configuration production"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "/"
+  to = "/connexion"
+  status = 301
   force = true
 
 [[redirects]]
-  from = "/"
-  to = "/connexion"
+  from = "/*"
+  to = "/index.html"
   status = 200
-  force = true
