@@ -74,9 +74,10 @@ import { MouvementStockComponent } from './components/mecanicien/mouvement-stock
 import { PlanningComponent } from './components/mecanicien/planning/planning.component';
 
 export const routes: Routes = [
- { path: 'services', component: ServiceListComponent }, // Route pour service-list
-//  { path: 'sous-services/:id', component: SousServiceListComponent }, // Route pour sous-service-list
+ { path: '', redirectTo: 'connexion', pathMatch: 'full' } ,
+
  { path: 'connexion', component: ConnexionComponent },
+ { path: 'services', component: ServiceListComponent }, 
  { path: 'connexion-manager', component: ConnexionManagerComponent },
 
  { path: 'header', component: HeaderComponent },
@@ -84,7 +85,6 @@ export const routes: Routes = [
  { path: 'inscription', component: InscriptionComponent },
  { path: 'inscription-mecanicien', component: InscriptionMecanicienComponent },
 
- //{ path: 'ajout-parking', component: AjoutParkingComponent },
  { path: 'ajout-marque-voiture', component: AjoutMarqueVoitureComponent },
  { path: 'ajout-model-voiture', component: AjoutModelVoitureComponent },
 
@@ -139,12 +139,13 @@ export const routes: Routes = [
  { path: 'gestion-rendez-vous', component: GestionRendezVousComponent },
 
 /////////////MECANICIEN///////////////////////
-{ path: 'emplois-temps', component: EmploisDuTempsMecanicienComponent },
-{ path: 'planning-mecanicien', component: PlanningComponent },
+ { path: 'emplois-temps', component: EmploisDuTempsMecanicienComponent },
+ { path: 'planning-mecanicien', component: PlanningComponent },
  { path: 'connexion-mecanicien', component: ConnexionMecanicienComponent },
  { path: 'factures-du-jour', component: FacturesComponent },
  { path: 'factures-parking-du-jour', component: FactureParkingComponent },
  { path: 'mouvement-stock', component: MouvementStockComponent },
- { path: '', redirectTo: '/connexion', pathMatch: 'full' }, // Assure-toi d'avoir cette ligne
- { path: '**', redirectTo: '/connexion' } // Capture toutes les routes non définies
+
+ { path: '**', redirectTo: 'connexion'}
+ 
 ];
