@@ -43,12 +43,26 @@
   </table>
   <!-- Afficher un message si aucun rendez-vous n'est trouvé -->
   <p *ngIf="rendezVousSearch.length === 0 && rendez_vous.length === 0">Aucun rendez-vous trouvé.</p>
-</div>
+
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
 
 <!-- Deuxième popup (Rendez-vous) -->
 <div class="popup" *ngIf="showPopup">
   <div class="popup-content">
     <span class="close-btn" (click)="closePopup()">&times;</span>
+    <div *ngIf="successMessage" class="success-message">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
     <form (ngSubmit)="AddInterventions()" #addInterventionForm="ngForm">
       <div class="contain-input">
         <div class="input-group">
@@ -57,7 +71,7 @@
                  name="id_mecanicien"
                  id="id_mecanicien"
                  placeholder="Entrez le mécanicien"
-                 [(ngModel)]="elementForm.id_mecanicien"
+                 [(ngModel)]="elementForm.nom_mecanicien"
                  (ngModelChange)="onMecanicienSearch()"
                  required>
 

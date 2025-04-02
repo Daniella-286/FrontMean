@@ -1,8 +1,12 @@
 <div class="menu">
   <ul>
-      <li><a href="/connexion">Connexion</a></li>
+    <li *ngIf="!isAuthenticated">
+      <a routerLink="/connexion">Connexion</a>
+    </li>
+    <li *ngIf="isAuthenticated">
+      <button (click)="logout()">Déconnexion</button>
+    </li>
       <li><a href="/services">Services</a></li>
-
 
       <li class="has-submenu">
         <a href="#">Véhicules  <i class="fa fa-chevron-down"></i></a>
@@ -15,7 +19,17 @@
       <li class="has-submenu">
         <a href="#">Intervention</a>
         <ul class="submenu">
-          <li><a href="/list-intervention-client">Liste </a></li>
+          <!-- <li><a href="/list-intervention-client">Liste interbe, </a></li> -->
+          <li><a href="/historiques-interventions-vehicules">Historiques interventions </a></li>
+        </ul>
+      </li>
+
+      <li class="has-submenu">
+        <a href="#">Facture</a>
+        <ul class="submenu">
+          <!-- <li><a href="/list-intervention-client">Liste interbe, </a></li> -->
+          <li><a href="/facturation-parking">Facture parking</a></li>
+          <li><a href="/facturation-service">Facture service</a></li>
         </ul>
       </li>
 
@@ -31,8 +45,6 @@
 
 
       <li><a href="/gestion-client-inscrits">Listes clients</a></li>
-
-
 
       <li class="has-submenu">
         <a href="#">Devis  <i class="fa fa-chevron-down"></i></a>

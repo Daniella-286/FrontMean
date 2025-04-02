@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -62,7 +62,7 @@ export class DashboardService {
   getStockRestant(page: number, limit: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/stock/reste?page=${page}&limit=${limit}`, { headers: this.getHeaders() });
   }
-  
+
   getSeuilStock(): Observable<any> {
     return this.http.get( this.apiUrl2 , { headers: this.getHeaders() });
   }
@@ -70,5 +70,5 @@ export class DashboardService {
   getStockHistory(page: number, limit: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/stock/history?page=${page}&limit=${limit}`, { headers: this.getHeaders() });
   }
-  
+
 }

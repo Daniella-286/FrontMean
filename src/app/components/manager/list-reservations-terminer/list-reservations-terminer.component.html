@@ -1,0 +1,40 @@
+<div class="titre">
+  <h1>Liste des réservations terminer </h1>
+  <!-- <div class="input-group">
+    <label for="parking">Research</label>
+    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
+    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
+    <button type="button" class="submit-btn" (click)="getReservationTerminerSearch()">Search</button>
+  </div> -->
+
+</div>
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Parking</th>
+        <th>Véhicules</th>
+        <th>Date debut</th>
+        <th>Date fin</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Itérer sur les réservations -->
+      <tr *ngFor="let reservation of reservations">
+        <td>{{ reservation.id_parking.numero }}</td>
+        <td>{{ reservation.id_vehicule.immatriculation }}</td>  <!-- Afficher le véhicule -->
+        <td>{{ reservation.date_debut | date:'dd/MM/yyyy HH:mm:ss' }}</td>  <!-- Afficher la date de début au format souhaité -->
+        <td>{{ reservation.date_fin  | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} sur {{ totalPages }}</span> <!-- Utilisation de totalPages ici -->
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+  </div>
+
+</div>
+
+

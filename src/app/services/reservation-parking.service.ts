@@ -23,17 +23,24 @@ export class ReservationParkingService {
     return new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
-  // private getHeaders(): HttpHeaders {
-  //   let token = '';
+  getReservationTerminer(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/facturables`, { headers: this.getHeaders() });
+  }
 
-  //   // Vérifier si l'on est dans le navigateur avant d'utiliser localStorage
-  //   if (typeof window !== 'undefined') {
-  //     token = localStorage.getItem('token') || ''; // Récupérer le token du localStorage
-  //   }
+  // getReservationTerminerSearch(dateDebut: string, dateFin: string) {
+  //   // Convertir les dates en format 'YYYY-MM-DD'
+  //   const dateDebutFormatted = this.formatDate(dateDebut);
+  //   const dateFinFormatted = this.formatDate(dateFin);
 
-  //   return new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': token ? `Bearer ${token}` : '' // Ajouter le token dans l'Authorization si disponible
+  //   // Créer les paramètres pour la requête HTTP
+  //   const params = new HttpParams()
+  //     .set('date_debut', dateDebutFormatted)
+  //     .set('date_fin', dateFinFormatted);
+
+  //   // Faire la requête HTTP GET avec les paramètres et les headers
+  //   return this.http.get(`${this.apiUrl}/facturables`, {
+  //     params: params,
+  //     headers: this.getHeaders()
   //   });
   // }
 
@@ -132,7 +139,13 @@ export class ReservationParkingService {
       });
     }
 
+    getAllReservation(page: number, limit: number): Observable<any> {
+      return this.http.get(`${this.apiUrl}/attente-validation-manager?page=${page}&limit=${limit}`, {
+        headers: this.getHeaders()
+      });
+     }
 
+      // Faire la requête HTTP GET avec les paramètres et les headers
 
     getAllReservationSearch(dateDebut: string, dateFin: string) {
       // Convertir les dates en format 'YYYY-MM-DD'

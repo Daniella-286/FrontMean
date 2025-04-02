@@ -23,18 +23,17 @@ export class MecanicienService {
     return new HttpHeaders({ 'Content-Type': 'application/json' });
   }
 
-  getRendezVousMecanicienDefault() {
-    return this.http.get(`${this.apiUrl}/non-valides` , { headers: this.getHeaders() });
+  getMecaniciensNonValides(page: number, limit: number, search: string) {
+    return this.http.get(`${this.apiUrl}/non-valides?page=${page}&limit=${limit}&search=${search}`,
+      { headers: this.getHeaders() });
   }
 
 
-  getListeMecaniciens(id_mecanicien: string) {
-      const params = new HttpParams()
-        .set('id_mecanicien', id_mecanicien)
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get(`${this.apiUrl}/listes-mecaniciens` , {   params: params, headers });
-  }
 
+  getListeMecaniciens(search: string) {
+    const params = new HttpParams().set('search', search);
+    return this.http.get<{ success: boolean; data: any[] }>(`${this.apiUrl}/listes-mecaniciens`, { params });
+  }
 
   validationMecanicieByManager(id_mecanicien: string, id_service: string): Observable<any> {
     const headers = this.getHeaders();

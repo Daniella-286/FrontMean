@@ -34,12 +34,13 @@
 }
 
 .services-container {
-  display: flex;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Organisation fluide */
+  gap: 20px; /* Réduction de l'espace entre les cartes */
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
+  justify-content: center;
 }
 
 /* Carte du service */
@@ -50,11 +51,10 @@
   text-align: center;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
-}
-
-
-.service {
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  height: auto; /* Ajustement dynamique */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .service:hover {
@@ -62,18 +62,10 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.service:active {
-  transform: scale(0.95); /* Légère réduction au clic pour un effet interactif */
-}
-
-.service-a{
-  text-decoration: none; /* Supprime le soulignement du lien */
-  color: inherit; /* Garde la couleur du texte par défaut */
-}
-
 /* Image des services */
 .service-image {
-  height: 200px;
+  width: 100%;
+  height: 180px; /* Uniformisation des images */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,35 +74,46 @@
 }
 
 .service-image img {
-  width: 100%;  /* L'image prend toute la largeur du div */
-  height: 100%;  /* L'image prend toute la hauteur du div */
-  object-fit: cover; /* Cela permet à l'image de couvrir tout le div sans déformation */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajustement pour éviter la déformation */
 }
 
-
-/* Adaptation pour petits écrans */
-
-/* Description du service */
+/* Texte du service */
 .service-description {
-  text-align: left;
+  text-align: center;
+  padding: 10px 0;
+  flex-grow: 1;
 }
 
 .service-description h2 {
   color: #333;
+  font-size: 18px;
   margin-bottom: 5px;
 }
 
+.service-text {
+  font-size: 14px;
+  color: #666;
+  height: 45px; /* Limite la hauteur du texte */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Bouton */
 .service button {
   background: #008080;
   color: white;
   border: none;
-  padding: 12px 15px;
+  padding: 10px 15px;
   border-radius: 15px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s ease-in-out;
-  width: 70%;
+  width: 90%;
+  max-width: 200px;
   margin-top: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
@@ -119,6 +122,20 @@
   background: #006666;
   transform: scale(1.05);
 }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .services-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 500px) {
+  .services-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 
 .modal-overlay {
   position: fixed;

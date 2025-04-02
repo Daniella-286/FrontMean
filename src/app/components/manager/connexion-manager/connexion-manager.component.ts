@@ -25,7 +25,7 @@ export class ConnexionManagerComponent {
     constructor(private connexionManagerService: ConnexionManagerService , private router: Router) {}
 
     getConnexionManager(): void {
-      console.log("📤 Données envoyées :", this.elementForm); // 🔍 Vérifier les données envoyées
+      console.log("📤 Données envoyées :", this.elementForm);
 
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -36,10 +36,8 @@ export class ConnexionManagerComponent {
           // Si la réponse contient un token, le stocker dans localStorage
           if (typeof window !== 'undefined' && response && response.token) {
             localStorage.setItem('token', response.token);
-            console.log('Token enregistré dans localStorage');
-
-            // Redirection vers la page services
-            this.router.navigate(['/services']);
+            localStorage.setItem('role', 'manager'); // Stocke le rôle
+            console.log('Token et rôle enregistrés dans localStorage');
           }
 
           // Réinitialiser le formulaire après une connexion réussie
@@ -47,11 +45,15 @@ export class ConnexionManagerComponent {
 
           // Afficher un message de succès (si nécessaire)
           this.serverMessage = { text: 'Connexion réussie', class: 'success' };
+
+          // Rediriger vers la page appropriée après la connexion
+          this.router.navigate(['/services']);
         }, error => {
           console.error("❌ Erreur lors de la connexion :", error);
           // Capturer et afficher le message d'erreur du backend
           const errorMessage = error.error?.message || 'Une erreur est survenue lors de la connexion.';
-          this.serverMessage = { text: errorMessage, class: 'error' }; // Message d'erreur
+          this.serverMessage = { text: errorMessage, class: 'error' };
         });
-}
+    }
+
 }

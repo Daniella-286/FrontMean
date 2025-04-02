@@ -11,7 +11,7 @@ import { ReservationParkingService } from '../../../services/reservation-parking
 })
 export class GestionReservationComponent {
 
-    reservations: any[] = [];
+  reservations: any[] = [];
     message: string = ""; // Stocke le message du backend
     errorMessage: string = ""
     elementSearchForm = {
@@ -20,16 +20,40 @@ export class GestionReservationComponent {
     }
     reservationSearch: any[] = []; // Stocker les parkings disponibles après recherche
 
+    currentPage: number = 1;
+    totalPages: number = 1;
+    pageSize: number = 10;
     ngOnInit(): void {
       this.loadReservationList();
       }
 
       constructor(private reservationParkingService: ReservationParkingService) {}
 
-    loadReservationList(): void {
-      this.reservationParkingService.getReservationConfirmer().subscribe(data => this.reservations =
-      data);
-    }
+      loadReservationList(): void {
+        this.reservationParkingService.getAllReservation(this.currentPage, this.pageSize).subscribe((data: any) => {
+          this.reservations = data.reservations;      // Liste des réservations
+          this.totalPages = data.totalPages;          // Total des pages
+        }, (error) => {
+          this.errorMessage = 'Une erreur est survenue lors du chargement des réservations.';
+        });
+      }
+
+      // Passer à la page suivante
+      nextPage(): void {
+        if (this.currentPage < this.totalPages) {
+          this.currentPage++;
+          this.loadReservationList();  // Recharger les données pour la page suivante
+        }
+      }
+
+      // Revenir à la page précédente
+      prevPage(): void {
+        if (this.currentPage > 1) {
+          this.currentPage--;
+          this.loadReservationList();  // Recharger les données pour la page précédente
+        }
+      }
+
 
     getAllReservationSearch(): void {
       if (

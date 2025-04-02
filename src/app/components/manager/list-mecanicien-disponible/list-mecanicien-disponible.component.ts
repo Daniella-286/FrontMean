@@ -22,6 +22,10 @@ export class ListMecanicienDisponibleComponent {
          errorMessage: string = "";
          serverMessage: { text: string, class: string } = { text: '', class: '' };
 
+         currentPage: number = 1;
+         totalPages: number = 1;
+         pageSize: number = 10;
+
         selectedRendezVousId: string | null = null;
         showUpdatePopup = false; // Pour l'update
         updateForm = { date_rendez_vous: '', id_client: ''  , date_demande:'' };
@@ -34,7 +38,7 @@ export class ListMecanicienDisponibleComponent {
         }
 
         loadService(): void {
-          this.serviceListService.getData().subscribe(data => {
+          this.serviceListService.getListesService().subscribe(data => {
             this.services = data;
            // this.loadService();  // Appeler loadArticles après que les catégories aient été chargées
           });
@@ -66,7 +70,9 @@ export class ListMecanicienDisponibleComponent {
                       // Si l'appel est réussi et que les mécaniciens sont renvoyés
                       if (data.success && Array.isArray(data.mecaniciens)) {
                           this.mecanicienSearch = data.mecaniciens;
+                          this.totalPages = data.totalPages;  // Met à jour le total de pages
                           this.errorMessage = ""; // Réinitialiser le message d'erreur
+
                       } else {
                           // Si la réponse n'est pas ce à quoi on s'attend, on vide la recherche
                           this.mecanicienSearch = [];
@@ -86,6 +92,13 @@ export class ListMecanicienDisponibleComponent {
                       }
                   }
               );
+      }
+
+      changePage(page: number): void {
+        if (page > 0 && page <= this.totalPages) {
+          this.currentPage = page;
+          this.getListMecanicienDisponibleSearch(this.elementSearchForm.date_intervention, this.elementSearchForm.duree_reparation, this.elementSearchForm.id_service);
+        }
       }
 
 

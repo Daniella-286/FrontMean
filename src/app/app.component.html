@@ -4,11 +4,18 @@
   <a href="/header-admin" routerLinkActive="active">Catégories</a>
 </nav> -->
   <!-- <p *ngIf="true">Current Route: {{ currentRoute() }}</p> -->
-  <app-header *ngIf="!hideHeaderFooter()"></app-header>
+  <!-- <app-header *ngIf="!hideHeaderFooter()"></app-header> -->
+  <app-menu-admin *ngIf="!hideHeaderFooter()"></app-menu-admin>
 
   <router-outlet></router-outlet>
 
   <app-footer *ngIf="!hideHeaderFooter()"></app-footer>
 
+
+<!-- gestion menu -->
+
+  <!-- <app-menu-admin *ngIf="showMenu"></app-menu-admin>  Affiche le menu si showMenu est vrai -->
+
+    <!-- <app-footer *ngIf="!hideHeaderFooter()"></app-footer> -->
 
 

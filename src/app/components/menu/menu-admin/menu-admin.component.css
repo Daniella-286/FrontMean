@@ -1,6 +1,6 @@
 /* Style du menu Admin */
 .menu-admin {
-  background-color: #006b68; /* Couleur sombre pour un contraste fort */
+  background-color: #006b68;
   color: white;
   padding: 20px 0;
   text-align: left;
@@ -9,10 +9,12 @@
   top: 0;
   left: 0;
   height: 100%;
-  width: 250px; /* Largeur fixe du menu */
+  width: 250px;
   z-index: 1000;
-  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2); /* Ombre sur le côté droit */
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Permet le défilement vertical si nécessaire */
 }
+
 
 /* Liste du menu Admin */
 .menu-admin ul {

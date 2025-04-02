@@ -52,12 +52,30 @@ export class GestionServiceComponent {
 
           constructor(private serviceListService: ServiceListService) {}
 
-        loadServiceList(): void {
-          this.serviceListService.getData().subscribe(data => this.services =
-          data);
-          console.log('service' , this.services );
+          loadServiceList(): void {
+            this.serviceListService.getData().subscribe(
+              data => {
+                if (data && Array.isArray(data.services)) {
+                  this.services = data.services; // ✅ Extraire uniquement la liste des services
+                } else {
+                  console.error("❌ Erreur: data.services reçu n'est pas un tableau", data);
+                  this.services = [];
+                }
+              },
+              error => {
+                console.error("❌ Erreur lors du chargement des services :", error);
+                this.services = [];
+              }
+            );
+          }
 
-        }
+
+        // loadServiceList(): void {
+        //   this.serviceListService.getData().subscribe(data => this.services =
+        //   data);
+        //   console.log('service' , this.services );
+
+        // }
         // Fonction pour récupérer le fichier sélectionné
         onFileSelected(event: any): void {
           if (event.target.files.length > 0) {

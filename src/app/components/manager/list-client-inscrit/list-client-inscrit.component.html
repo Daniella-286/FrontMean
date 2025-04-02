@@ -1,36 +1,48 @@
 <div class="titre">
-  <h1>Liste des clients inscrits </h1>
-  <!-- <div class="input-group">
-    <label for="parking">Research</label>
-    <input type="date" name="date_debut" id="date_debut" [(ngModel)]="elementSearchForm.date_debut" required>
-    - <input type="date" name="date_fin" id="date_fin" [(ngModel)]="elementSearchForm.date_fin" required>
-    <button type="button" class="submit-btn" (click)="getReservationSearch()">Search</button>
-  </div> -->
+  <h1>Liste des clients inscrits</h1>
 </div>
+
+<div class="input-group">
+  <label for="parking">Research</label>
+  <input type="text" [(ngModel)]="searchQuery" placeholder="Rechercher un client...">
+  <button type="button" class="submit-btn" (click)="searchClients()">Rechercher</button>
+
+</div>
+  <!-- Affichage du message d'erreur -->
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
 <div>
   <table>
     <thead>
       <tr>
-        <th>date d'inscription</th>
-        <th>nom</th>
-        <th>prénom</th>
-        <th>date de naissance</th>
+        <th>Date d'inscription</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date de naissance</th>
         <th>Contact</th>
         <th>Adresse</th>
-        <th>e-mail</th>
+        <th>E-mail</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Itérer sur les réservations -->
+
       <tr *ngFor="let client of clients">
-        <td>{{client.date_inscription | date:'dd/MM/yyyy HH:mm'}}</td>  <!-- Afficher le parking -->
-        <td>{{client.nom}}</td>  <!-- Afficher le véhicule -->
-        <td>{{client.prenom}}</td>  <!-- Afficher la date de début au format souhaité -->
-        <td>{{client.date_naissance | date:'dd/MM/yyyy'}}</td>  <!-- Afficher la date de fin au format souhaité -->
+        <td>{{client.date_inscription | date:'dd/MM/yyyy HH:mm'}}</td>
+        <td>{{client.nom}}</td>
+        <td>{{client.prenom}}</td>
+        <td>{{client.date_naissance | date:'dd/MM/yyyy'}}</td>
         <td>{{client.contact}}</td>
         <td>{{client.adresse}}</td>
         <td>{{client.email}}</td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Pagination -->
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+  <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Suivant</button>
 </div>

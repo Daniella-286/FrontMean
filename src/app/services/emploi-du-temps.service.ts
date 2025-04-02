@@ -24,5 +24,5 @@ export class EmploiDuTempsService {
   getEmploiDuTemps(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/mecanicien/emploi-du-temps`, { headers: this.getHeaders() });
   }
-  
+
 }

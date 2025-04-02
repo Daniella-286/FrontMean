@@ -1,0 +1,101 @@
+<div class="background-overlay"  *ngIf="showPopup || showUpdatePopup" (click)="closePopup()"></div>
+
+<div class="piece-container">
+  <div class="piece">
+    <div class="piece">
+      <h2>Liste des factures services</h2>
+          <!-- Immatriculation -->
+    </div>
+  </div>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>numéro de facture</th>
+          <th>Total </th>
+          <th>date de facture  </th>
+          <th>durée de réparation</th>
+          <th>date interventions</th>
+          <th>date fin intervention</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Afficher les rendez-vous, soit les résultats de la recherche, soit les résultats par défaut -->
+        <tr *ngFor="let facture of Factures;">
+          <td>{{ facture?.numero_facture }}</td>
+          <td>{{ facture?.total }}</td>
+          <td>{{ facture?.date_facture }}</td>
+          <td>{{ facture?.id_intervention?.duree_reparation }}</td>
+          <td>{{ facture?.id_intervention?.date_intervention | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ facture?.id_intervention?.date_fin_intervention | date:'dd/MM/yyyy HH:mm'}}</td>
+          <td>
+            <button type="button" (click)="openPopup(facture)" class="submit-btn">details </button>
+         </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+<div class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+  <span>Page {{ currentPage }} / {{ totalPages }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Suivant</button>
+</div>
+
+<div *ngIf="showPopup" class="popup">
+  <div class="popup-content">
+    <h2>Détails de la Facture</h2>
+
+    <!-- Informations sur la facture -->
+    <div>
+      <div *ngIf="detailFactures.facture && detailFactures.facture.numero_facture">
+        <h2>Facture N° {{ detailFactures.facture.numero_facture }}</h2>
+        <p>Date : {{ detailFactures.facture.date_facture }}</p>
+        <p>Total : {{ detailFactures.facture.total_facture | currency }}</p>
+      </div>
+
+    <!-- Détails des services -->
+    <h3>Services</h3>
+    <table *ngIf="detailFactures.details_services.length > 0">
+      <thead>
+        <tr>
+          <th>Nom du Service</th>
+          <th>Tarif</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of detailFactures.details_services">
+          <td>{{ service.nom }}</td>
+          <td>{{ service.tarif | currency }}</td>
+          <td>{{ service.sous_total | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="detailFactures.details_services.length === 0">Aucun service ajouté.</p>
+
+    <h3>Pièces</h3>
+<table *ngIf="detailFactures.details_pieces.length > 0">
+  <thead>
+    <tr>
+      <th>Nom de la Pièce</th>
+      <th>Quantité</th>
+      <th>Prix Unitaire</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let piece of detailFactures.details_pieces">
+      <td>{{ piece.nom }}</td>
+      <td>{{ piece.quantite }}</td>
+      <td>{{ piece.prix_unitaire | currency }}</td>
+      <td>{{ piece.sous_total | currency }}</td>
+    </tr>
+  </tbody>
+</table>
+<p *ngIf="detailFactures.details_pieces.length === 0">Aucune pièce ajoutée.</p>
+    <button (click)="closePopup()">Fermer</button>
+    <button class="submit-btn" (click)="generatePDF()">Generate Pdf</button>
+  </div>
+</div>

@@ -39,14 +39,11 @@ ngOnInit(): void {
 
       // Ouvrir le popup d'ajout
       openPopup(id_demande: string): void {
-        console.log("ID envoyé pour le devis ooooohh :", id_demande);
+        console.log("ID envoyé pour le tsy ooooohh :", id_demande);
         this.selectedDemandeId = id_demande; // Stocke l'ID
         this.showPopup = true;
-
         this.loadDetailDevis(id_demande);
       }
-
-
 
     closePopup() {
       this.showPopup = false;
@@ -55,7 +52,7 @@ ngOnInit(): void {
 
       // Ouvrir le popup d'ajout
       openPopupRendezVous(id_demande: string): void {
-        console.log("ID envoyé pour le devis ooooohh :", id_demande);
+        console.log("ID envoyé pour le ggg ooooohh :", id_demande);
         this.selectedDemandeId = id_demande; // Stocke l'ID
         this.showPopupRendezVous = true;
         // Assigner l'ID de la demande à elementForm.id_demande

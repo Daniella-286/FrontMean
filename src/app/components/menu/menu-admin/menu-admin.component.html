@@ -1,52 +1,235 @@
 <div class="menu-admin">
   <ul>
 
-      <li class="has-submenu">
-        <a href="#">Authentification</a>
-        <ul class="submenu">
-          <li><a href="/connexion">Connexion</a></li>
-          <li><a href="/connexion-mecanicien">Connexion mecanicien</a></li>
-          <li><a href="/inscription-mecanicien">Inscription mecanicien </a></li>
-        </ul>
+    <!-- client -->
+
+    <!-- Menu CLIENT -->
+    <ng-container *ngIf="role === 'client'">
+      <li *ngIf="isAuthenticated">
+        <button (click)="logout()">Déconnexion</button>
       </li>
 
+      <li><a href="/services">Services</a></li>
+
       <li class="has-submenu">
-        <a href="#">Mecanicien</a>
+        <a href="#">Véhicules  <i class="fa fa-chevron-down"></i></a>
         <ul class="submenu">
-          <li><a href="/gestion-mecanicien">Gestion Mecanicien</a></li>
-          <li><a href="/list-mecanicien-disponible">Liste des mécaniciens dispo</a></li>
+          <li><a href="/ajout-vehicule">Ajout</a></li>
+          <li><a href="/gestion-vehicule">Gestion véhicule</a></li>
         </ul>
       </li>
 
       <li class="has-submenu">
         <a href="#">Intervention</a>
         <ul class="submenu">
-          <li><a href="/gestion-intervention">Gestion Intervention</a></li>
+          <!-- <li><a href="/list-intervention-client">Liste interbe, </a></li> -->
+          <li><a href="/historiques-interventions-vehicules">Historiques interventions </a></li>
         </ul>
       </li>
 
       <li class="has-submenu">
-        <a href="#">Service et sous service</a>
+        <a href="#">Véhicules  <i class="fa fa-chevron-down"></i></a>
         <ul class="submenu">
-          <li><a href="/gestion-service">Services</a></li>
-          <li><a href="/gestion-sous-service">Gestion sous-service</a></li>
+          <li><a href="/ajout-vehicule">Ajout</a></li>
+          <li><a href="/gestion-vehicule">Gestion véhicule</a></li>
+        </ul>
+      </li>
+
+
+
+
+      <li class="has-submenu">
+        <a href="#">Rendez-vous  <i class="fa fa-chevron-down"></i></a>
+        <ul class="submenu">
+          <li><a href="/list-rendez-vous-client">Listes rendez-vous </a></li>
+          <li><a href="/list-rendez-vous-client-confirmer">Listes rendez-vous confirmer</a></li>
         </ul>
       </li>
 
       <li class="has-submenu">
-        <a href="#">Dashboard</a>
+        <a href="#">Facture</a>
         <ul class="submenu">
-          <li><a href="/statistique-reparation-par-mois">Statistique des réparations </a></li>
+          <!-- <li><a href="/list-intervention-client">Liste interbe, </a></li> -->
+          <li><a href="/facturation-parking">Facture parking</a></li>
+          <li><a href="/facturation-service">Facture service</a></li>
         </ul>
       </li>
 
       <li class="has-submenu">
-        <a href="#">Dashboard</a>
+        <a href="#">Rendez-vous  <i class="fa fa-chevron-down"></i></a>
         <ul class="submenu">
-          <li><a href="/gestion-rendez-vous">Liste des rendez vous</a></li>
-         
+          <li><a href="/list-rendez-vous-client">Listes rendez-vous </a></li>
+          <li><a href="/list-rendez-vous-client-confirmer">Listes rendez-vous confirmer</a></li>
+          <li><a href="/list-rendez-vous-non-dispo-attente">Liste des rendez-vouc non dispo et en attente</a></li>
         </ul>
       </li>
+
+
+      <li><a href="/gestion-client-inscrits">Listes clients</a></li>
+
+      <li class="has-submenu">
+        <a href="#">Devis  <i class="fa fa-chevron-down"></i></a>
+        <ul class="submenu">
+          <li><a href="/demande-devis-client">Demande devis</a></li>
+      <li><a href="/list-demande-attente-client">Demande en Attente</a></li>
+      <li><a href="/list-demande-envoye-client">Demande envoyé</a></li>
+        </ul>
+      </li>
+
+
+
+      <li class="has-submenu">
+        <a href="#">Réservations <i class="fa fa-chevron-down"></i></a>
+        <ul class="submenu">
+          <li><a href="/reservation-parking">Réservation Parking</a></li>
+          <li><a href="/list-reservation-client">Réservation envoyé</a></li>
+          <li><a href="/list-reservation-confirme">Réservation Validé</a></li>
+        </ul>
+      </li>
+
+
+
+
+
+    </ng-container>
+
+
+
+
+
+    <!-- manager -->
+
+        <!-- Menu MANAGER -->
+        <ng-container *ngIf="role === 'manager'">
+
+
+
+          <!-- <li class="has-submenu">
+            <a href="#">Authentification</a>
+            <ul class="submenu">
+              <li><a href="/connexion">Connexion</a></li>
+              <li><a href="/connexion-mecanicien">Connexion mecanicien</a></li>
+              <li><a href="/inscription-mecanicien">Inscription mecanicien </a></li>
+            </ul>
+          </li> -->
+
+          <li *ngIf="isAuthenticatedManager">
+            <button (click)="logoutManager()">Déconnexion</button>
+          </li>
+
+
+          <li class="has-submenu">
+            <a href="#">Réservations</a>
+            <ul class="submenu">
+              <!-- <li><a href="/list-reservation-client">Liste des réservations clients</a></li> -->
+              <li><a href="/list-reservation-confirme">Réservation confirmée</a></li>
+              <li><a href="/gestion-reservation">Gestion Réservation</a></li>
+              <li><a href="/list-reservation-terminer"> Réservation terminé</a></li>
+            </ul>
+          </li>
+
+          <ul class="submenu">
+            <li><a href="/gestion-service">Gestion service</a></li>
+          </ul>
+<!--
+          <li class="has-submenu">
+            <a href="#">Intervention</a>
+            <ul class="submenu">
+              <li><a href="/list-intervention-client">Liste intervention</a></li>
+            </ul>
+          </li> -->
+
+          <li class="has-submenu">
+            <a href="#">Mecanicien</a>
+            <ul class="submenu">
+              <li><a href="/gestion-mecanicien">Gestion Mecanicien</a></li>
+              <li><a href="/list-mecanicien-disponible">Liste des mécaniciens dispo</a></li>
+            </ul>
+          </li>
+
+          <li class="has-submenu">
+            <a href="#">Intervention</a>
+            <ul class="submenu">
+              <li><a href="/gestion-intervention">Gestion Intervention</a></li>
+              <li><a href="/list-intervention-terminer">Liste interventions</a></li>
+            </ul>
+          </li>
+
+          <li class="has-submenu">
+            <a href="#">Service et sous service</a>
+            <ul class="submenu">
+              <li><a href="/gestion-service">Services</a></li>
+              <li><a href="/gestion-sous-service">Gestion sous-service</a></li>
+            </ul>
+          </li>
+
+          <li class="has-submenu">
+            <a href="#">Rendez-vous</a>
+            <ul class="submenu">
+              <li><a href="/gestion-rendez-vous">Liste des rendez vous</a></li>
+            </ul>
+          </li>
+
+
+          <li class="has-submenu">
+            <a href="#">Dashboard <i class="fa fa-chevron-down"></i></a>
+            <ul class="submenu">
+              <li><a href="/manager-dashboard">Général</a></li>
+              <li><a href="/manager-dashboard-intervention">Statistique intervention</a></li>
+              <li><a href="/manager-dashboard-finance">Statistique finance</a></li>
+              <li><a href="/manager-dashboard-stock-restant">Stock restant</a></li>
+              <li><a href="/manager-dashboard-stock-history">Historique mouvement stock</a></li>
+            </ul>
+          </li>
+
+
+
+          <li><a href="/gestion-client-inscrits">Listes clients</a></li>
+          <li><a href="/gestion-piece">Pièces</a></li>
+          <li><a href="/gestion-marque">Gestion marques</a></li>
+          <li><a href="/gestion-modele">Gestion Modele</a></li>
+
+          <!-- Menu Réservations avec un sous-menu -->
+
+          <li class="has-submenu">
+            <a href="#">Devis</a>
+            <ul class="submenu">
+              <!-- <li><a href="/demande-devis">Demande de devis </a></li> -->
+              <li><a href="/gestion-demande-devis">Gestion demande devis</a></li>
+            </ul>
+          </li>
+
+
+
+
+
+          <li><a href="/services">Services</a></li>
+
+
+
+
+
+        </ng-container>
+
+         <!-- Menu MANAGER -->
+         <ng-container *ngIf="role === 'mecanicien'">
+
+          <ul>
+            <li *ngIf="isAuthenticatedMecanicien">
+            <button (click)="logoutMecanicien()">Déconnexion</button>
+          </li>
+            <li><a href="/emplois-temps">Emplois du temps</a></li>
+            <li><a href="/planning-mecanicien">Planning </a></li>
+            <li><a href="/factures-du-jour">Facture service</a></li>
+            <li><a href="/factures-parking-du-jour">Facture parking</a></li>
+            <li><a href="/mouvement-stock">Mouvement de stock</a></li>
+          </ul>
+
+         </ng-container>
+
+  </ul>
+</div>
+
 
 
 
@@ -66,86 +249,3 @@
           <li><a href="/listes-taches-mecanicien">Listes taches</a></li>
         </ul>
       </li> -->
-
-
-
-      <li><a href="/gestion-client-inscrits">Listes clients</a></li>
-      <!-- <li><a href="/gestion-piece">Pièces</a></li>
-      <li><a href="/gestion-marque">Gestion marques</a></li>
-      <li><a href="/gestion-modele">Gestion Modele</a></li> -->
-
-      <!-- Menu Réservations avec un sous-menu -->
-      <li class="has-submenu">
-        <a href="#">Réservations</a>
-        <ul class="submenu">
-          <!-- <li><a href="/list-reservation-client">Liste des réservations clients</a></li> -->
-          <li><a href="/list-reservation-confirme">Réservation confirmée</a></li>
-          <li><a href="/gestion-reservation">Gestion Réservation</a></li>
-        </ul>
-      </li>
-
-      <li class="has-submenu">
-        <a href="#">Devis</a>
-        <ul class="submenu">
-          <!-- <li><a href="/demande-devis">Demande de devis </a></li> -->
-          <li><a href="/gestion-demande-devis">Gestion demande devis</a></li>
-        </ul>
-      </li>
-
-
-
-
-
-      <li><a href="/connexion">Connexion</a></li>
-      <li><a href="/services">Services</a></li>
-
-
-      <li class="has-submenu">
-        <a href="#">Véhicules  <i class="fa fa-chevron-down"></i></a>
-        <ul class="submenu">
-          <li><a href="/ajout-vehicule">Ajout</a></li>
-          <li><a href="/gestion-vehicule">Gestion véhicule</a></li>
-        </ul>
-      </li>
-
-      <li class="has-submenu">
-        <a href="#">Intervention</a>
-        <ul class="submenu">
-          <li><a href="/list-intervention-client">Liste intervention</a></li>
-        </ul>
-      </li>
-
-
-      <li class="has-submenu">
-        <a href="#">Rendez-vous  <i class="fa fa-chevron-down"></i></a>
-        <ul class="submenu">
-          <li><a href="/list-rendez-vous-client">Listes rendez-vous </a></li>
-          <li><a href="/list-rendez-vous-client-confirmer">Listes rendez-vous confirmer</a></li>
-        </ul>
-      </li>
-
-
-      <li><a href="/gestion-client-inscrits">Listes clients</a></li>
-
-      <li class="has-submenu">
-        <a href="#">Devis  <i class="fa fa-chevron-down"></i></a>
-        <ul class="submenu">
-          <li><a href="/demande-devis-client">Demande devis</a></li>
-      <li><a href="/list-demande-attente-client">Demande en Attente</a></li>
-      <li><a href="/list-demande-envoye-client">Demande envoyé</a></li>
-        </ul>
-      </li>
-
-      <li class="has-submenu">
-        <a href="#">Réservations <i class="fa fa-chevron-down"></i></a>
-        <ul class="submenu">
-          <li><a href="/reservation-parking">Réservation Parking</a></li>
-          <li><a href="/list-reservation-client">Réservation envoyé</a></li>
-          <li><a href="/list-reservation-confirme">Réservation Validé</a></li>
-        </ul>
-      </li>
-
-
-
-  </ul>
-</div>

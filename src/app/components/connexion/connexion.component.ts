@@ -32,14 +32,11 @@ export class ConnexionComponent {
         if (typeof window !== 'undefined' && response && response.token) {
           localStorage.setItem('token', response.token);
           console.log('Token enregistré dans localStorage');
-
-          // Redirection vers la page services
+          //Redirection vers la page services
           this.router.navigate(['/services']);
         }
-
         // Réinitialiser le formulaire après une connexion réussie
         this.elementForm = { email: '', mdp: '' };
-
         // Afficher un message de succès (si nécessaire)
         this.serverMessage = { text: 'Connexion réussie', class: 'success' };
       }, error => {
@@ -49,5 +46,4 @@ export class ConnexionComponent {
         this.serverMessage = { text: errorMessage, class: 'error' }; // Message d'erreur
       });
   }
-
 }

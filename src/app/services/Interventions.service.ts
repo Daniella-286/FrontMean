@@ -25,19 +25,22 @@ export class InterventionService {
 
 
 
-getListMecanicienDisponibleSearch(date_intervention: string, duree_reparation: string , id_service: string) {
-  const date_interventionFormatted = this.formatDate(date_intervention);
+  getListMecanicienDisponibleSearch(date_intervention: string, duree_reparation: string, id_service: string, page: number = 1, limit: number = 10) {
+    const date_interventionFormatted = this.formatDate(date_intervention);
 
-  const params = new HttpParams()
-    .set('date_intervention', date_interventionFormatted)
-    .set('duree_reparation', duree_reparation)
-    .set('id_service', id_service)
+    const params = new HttpParams()
+      .set('date_intervention', date_interventionFormatted)
+      .set('duree_reparation', duree_reparation)
+      .set('id_service', id_service)
+      .set('page', page.toString())  // Ajoutez la pagination
+      .set('limit', limit.toString());  // Ajoutez la pagination
 
-  return this.http.get(`${this.apiUrl}/disponibilite-mecaniciens`, {
-    params: params,
-    headers: this.getHeaders()
-  });
-}
+    return this.http.get(`${this.apiUrl}/disponibilite-mecaniciens`, {
+      params: params,
+      headers: this.getHeaders()
+    });
+  }
+
 
 formatDate(date: string): string {
   const d = new Date(date);
@@ -59,7 +62,40 @@ formatDate(date: string): string {
     // const httpOptions = {
     //   headers: headers || new HttpHeaders({ 'Content-Type': 'application/json' })
     // };
-    return this.http.post<any>(this.apiUrl, interventions , { headers: this.getHeaders() });
+    return this.http.post<any>(`${this.apiUrl}/planifier`, interventions , { headers: this.getHeaders() });
   }
+
+  getHistoriqueIntervention(id_vehicules: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/historique/${id_vehicules}` , { headers: this.getHeaders() });
+  }
+
+  ///historique/:id_vehicule
+
+
+  getInterventionTerminerDefault(): Observable<any>  {
+    return this.http.get(`${this.apiUrl}/interventions-terminees` , { headers: this.getHeaders() });
+  }
+
+  getInterventionTerminerSearch(date: string) {
+    const params = new HttpParams().set('date', date); // ✅ Ajoute correctement le paramètre
+
+    return this.http.get(`${this.apiUrl}/interventions-terminees`, {
+      params: params,
+      headers: this.getHeaders()
+    });
+  }
+
+
+  // getInterventionTerminerSearch(dateSearch: string) {
+  //   const dateSearchFormatted = this.formatDate(dateSearch);
+  //   const params = new HttpParams().set('dateSearchFormatted', dateSearchFormatted);
+
+  //   return this.http.get(`${this.apiUrl}/interventions-terminees`, {
+  //     params: params,
+  //     headers: this.getHeaders()
+  //   });
+  // }
+
+
 
 }

@@ -1,17 +1,17 @@
 
- <div class="services-container">
+<div class="services-container">
   <div *ngFor="let service of services; trackBy: trackByService" class="service">
     <div class="service-image">
-      <img [src]="service.imageUrl" alt="Image du service" />
+      <img [src]="service.imageUrl || 'assets/default-image.jpg'" alt="Image du service" />
     </div>
     <div class="service-description">
       <h2>{{ service.nom_service }}</h2>
-      <p>{{ service.description }}</p>
+      <p class="service-text">{{ service.description }}</p>
     </div>
-
     <button (click)="openModal(service._id)">Voir les sous-services</button>
   </div>
 </div>
+
 
 <!-- Pagination -->
 <div class="pagination">
