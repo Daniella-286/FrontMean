@@ -74,9 +74,9 @@ import { MouvementStockComponent } from './components/mecanicien/mouvement-stock
 import { PlanningComponent } from './components/mecanicien/planning/planning.component';
 
 export const routes: Routes = [
- { path: '', redirectTo: 'connexion', pathMatch: 'full' } ,
+ { path: '', redirectTo: '', pathMatch: 'full' } ,
 
- { path: 'connexion', component: ConnexionComponent },
+ { path: '', component: ConnexionComponent },
  { path: 'services', component: ServiceListComponent }, 
  { path: 'connexion-manager', component: ConnexionManagerComponent },
 
@@ -146,6 +146,6 @@ export const routes: Routes = [
  { path: 'factures-parking-du-jour', component: FactureParkingComponent },
  { path: 'mouvement-stock', component: MouvementStockComponent },
 
- { path: '**', redirectTo: 'connexion'}
+ { path: '**', redirectTo: ''}
  
 ];
