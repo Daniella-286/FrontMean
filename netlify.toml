@@ -5,5 +5,5 @@
 
 [[redirects]]
   from = "/"
-  to = "/connexion"
+  to = "/"
   status = 301
